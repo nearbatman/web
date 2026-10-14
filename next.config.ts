@@ -1,10 +1,15 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
   cacheComponents: true,
   partialPrefetching: true,
+  images: {
+    // 90 is for the skidanov screenshot, where 75 smears the post text
+    qualities: [75, 90],
+  },
   turbopack: {
+    // a stray package-lock.json in the home folder would otherwise be picked as root
+    root: process.cwd(),
     rules: {
       "*.css": {
         loaders: ["@tailwindcss/turbopack"],
