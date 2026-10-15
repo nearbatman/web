@@ -15,6 +15,9 @@
   --ease-out-strong: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/* small phones in portrait (e.g. iPhone SE): hero text block gets compacted */
+@custom-variant short-mobile (@media (max-width: 767px) and (max-height: 720px));
+
 html {
   background: var(--color-night);
 }

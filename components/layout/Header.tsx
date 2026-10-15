@@ -42,9 +42,14 @@ export function Header() {
           >
             {hero.wordmark}
           </Link>
-          <BuyButton href={links.buy} size={scrolled ? "xs" : "sm"}>
-            {hero.buyLabel}
-          </BuyButton>
+          {/* mobile: the big hero button is on screen, so this one only appears once the hero is scrolled past */}
+          <div
+            className={`transition-[opacity,visibility] duration-200 motion-reduce:transition-none ${scrolled ? "" : "max-md:invisible max-md:opacity-0"}`}
+          >
+            <BuyButton href={links.buy} size={scrolled ? "xs" : "sm"}>
+              {hero.buyLabel}
+            </BuyButton>
+          </div>
         </div>
       </header>
     </>
