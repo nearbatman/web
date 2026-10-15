@@ -1,15 +1,26 @@
 import type { ReactNode } from "react";
 
-type Props = { href: string; children: ReactNode; className?: string };
+type Props = {
+  href: string;
+  children: ReactNode;
+  size?: "md" | "sm" | "xs";
+  className?: string;
+};
+
+const sizes = {
+  md: "h-16 px-8 text-[30px] shadow-[5px_5px_0_0_var(--color-bone)] hover:translate-x-[5px] hover:translate-y-[5px] hover:shadow-[0_0_0_0_var(--color-bone)] active:translate-x-[5px] active:translate-y-[5px] active:shadow-[0_0_0_0_var(--color-bone)]",
+  sm: "h-11 px-5 text-[22px] shadow-[3px_3px_0_0_var(--color-bone)] hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-[0_0_0_0_var(--color-bone)] active:translate-x-[3px] active:translate-y-[3px] active:shadow-[0_0_0_0_var(--color-bone)]",
+  xs: "h-9 px-4 text-[18px] shadow-[2px_2px_0_0_var(--color-bone)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[0_0_0_0_var(--color-bone)] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[0_0_0_0_var(--color-bone)]",
+};
 
 // green slab with a hard bone "print" shadow; pressing drops it into the shadow
-export function BuyButton({ href, children, className = "" }: Props) {
+export function BuyButton({ href, children, size = "md", className = "" }: Props) {
   return (
     <a
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className={`inline-flex h-16 items-center border-2 border-ink bg-signal px-8 font-display text-[30px] leading-none font-extrabold text-ink shadow-[5px_5px_0_0_var(--color-bone)] transition-[translate,box-shadow] duration-150 ease-(--ease-out-strong) hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[7px_7px_0_0_var(--color-bone)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-bone active:translate-x-[5px] active:translate-y-[5px] active:shadow-[0_0_0_0_var(--color-bone)] ${className}`}
+      className={`inline-flex items-center border-2 border-ink bg-signal font-display leading-none font-extrabold text-ink transition-[translate,box-shadow,height,padding,font-size] duration-120 ease-out focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-bone ${sizes[size]} ${className}`}
     >
       {children}
     </a>

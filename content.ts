@@ -3,7 +3,7 @@
 
 export type HeroMedia =
   | { kind: "image"; src: string }
-  | { kind: "video"; src: string; poster: string };
+  | { kind: "video"; src: string; poster: string; playbackRate?: number };
 
 export const site = {
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
@@ -39,8 +39,41 @@ export const hero = {
   wordmark: "BATMAN",
   sub: "near's co-founder named his corgi batman. the rest is history.",
   buyLabel: "buy $BATMAN",
-  // swap to { kind: "video", src: "/hero-loop.mp4", poster: "/hero-bg-frame.png" } once the loop is in /public
-  media: { kind: "image", src: "/hero-bg-frame.png" } as HeroMedia,
+  media: {
+    kind: "video",
+    src: "/hero-loop.mp4",
+    poster: "/hero-bg-frame.png",
+    playbackRate: 0.75,
+  } as HeroMedia,
+};
+
+// rain + fog laid over the hero video. tune everything here.
+export const weather = {
+  rain: {
+    density: 150, // drops per 1920x1080 of hero area, all layers together
+    angle: 12, // degrees off vertical, drops fall down-left
+    speed: 1, // multiplier on each layer's own speed
+    opacity: 0.2, // peak streak opacity (bone), scaled per layer
+    // far -> near: px/s, streak length + width in px, share of the drops, opacity multiplier
+    layers: [
+      { speed: 900, length: 14, width: 0.8, share: 0.5, alpha: 0.6 },
+      { speed: 1400, length: 24, width: 1, share: 0.3, alpha: 0.85 },
+      { speed: 2000, length: 40, width: 1.5, share: 0.2, alpha: 1 },
+    ],
+  },
+  fog: {
+    opacity: 0.15, // peak opacity of each fog bank (bone)
+  },
+};
+
+// fixed city backdrop below the hero; scrolls "down the building" as you read
+export const pageBg = {
+  src: "/page-bg-descent.jpg",
+  width: 1920,
+  height: 1140,
+  heightVh: 140, // rendered image height as % of the viewport, aspect kept (width covers)
+  bgOpacity: 0.15, // image opacity over #0B0B0F
+  fadeHeight: 200, // px of soft dark fade under the hero's bottom edge
 };
 
 export const lore = {
@@ -110,4 +143,5 @@ export const footer = {
   disclaimer:
     "$BATMAN is a memecoin with no intrinsic value or expectation of financial return. not affiliated with near foundation or alex skidanov. not financial advice.",
   copyright: "© 2026 batman",
+  xLabel: "batman on x",
 };

@@ -42,6 +42,7 @@ export function HowToBuy() {
         <ol className="border-y-2 border-bone">
           {howToBuy.steps.map((step, i) => (
             <li
+              data-reveal
               key={step}
               className="grid grid-cols-[120px_1fr] items-start gap-x-6 border-b-2 border-bone/25 py-7 last:border-b-0"
             >

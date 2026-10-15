@@ -11,7 +11,7 @@ export function Lore() {
       <div className="mx-auto grid max-w-[1400px] grid-cols-1 items-center gap-y-12 lg:grid-cols-[1fr_480px] lg:gap-x-[120px]">
         <div>
           <SectionHeading>{lore.heading}</SectionHeading>
-          <p className="mt-12 border-l-2 border-bone/30 pl-8 text-[clamp(18px,1.4vw,27px)] leading-[1.6]">
+          <p data-reveal className="mt-12 border-l-2 border-bone/30 pl-8 text-[clamp(18px,1.4vw,27px)] leading-[1.6]">
             {lines.map((line, i) => (
               <span
                 key={line}
@@ -24,6 +24,7 @@ export function Lore() {
         </div>
 
         <a
+          data-reveal
           href={links.skidanovPost}
           target="_blank"
           rel="noopener noreferrer"

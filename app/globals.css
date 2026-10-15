@@ -19,8 +19,8 @@ html {
   background: var(--color-night);
 }
 
+/* body stays transparent so the fixed page backdrop (z -10) shows through; html paints the night color */
 body {
-  background: var(--color-night);
   color: var(--color-bone);
   font-family: var(--font-mono), ui-monospace, monospace;
   -webkit-font-smoothing: antialiased;
@@ -53,4 +53,129 @@ body {
   background:
     linear-gradient(0deg, var(--color-night) 0%, rgb(11 11 15 / 0.55) 22%, rgb(11 11 15 / 0) 46%),
     linear-gradient(90deg, rgb(11 11 15 / 0.8) 0%, rgb(11 11 15 / 0.45) 30%, rgb(11 11 15 / 0) 56%);
+}
+
+/* keep anchored sections clear of the fixed header (~77px when scrolled) */
+section[id] {
+  scroll-margin-top: 80px;
+}
+
+/* hero fog: two big soft banks in the lower half, drifting sideways at different speeds */
+.fog {
+  position: absolute;
+  bottom: -12%;
+  height: 62%;
+  background: radial-gradient(ellipse at center, var(--color-bone) 0%, transparent 68%);
+  will-change: transform;
+  animation: fog-drift 46s ease-in-out infinite alternate;
+}
+.fog-a {
+  left: -25%;
+  width: 95%;
+}
+.fog-b {
+  left: 30%;
+  width: 90%;
+  height: 52%;
+  animation-duration: 64s;
+  animation-direction: alternate-reverse;
+}
+@keyframes fog-drift {
+  from {
+    transform: translate3d(-14%, 0, 0);
+  }
+  to {
+    transform: translate3d(14%, 0, 0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fog {
+    animation: none;
+  }
+}
+
+/* ---- page load: night veil fades out like coming out of a shadow ---- */
+.page-veil {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  pointer-events: none;
+  background: var(--color-night);
+  animation: veil-out 700ms ease-out 120ms forwards;
+}
+@keyframes veil-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+/* ---- shared rise-in: fade + 16px up ---- */
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 16px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* hero content on load: wordmark -> sub -> buttons (delays set inline) */
+.hero-rise {
+  animation: rise-in 700ms ease-out both;
+}
+
+/* scroll reveal: hidden state only once the hook has run (html.reveal-ready) */
+.reveal-ready [data-reveal]:not(.is-revealed) {
+  opacity: 0;
+}
+[data-reveal].is-revealed {
+  animation: rise-in 500ms ease-out backwards;
+  animation-delay: var(--reveal-delay, 0ms);
+}
+
+/* ---- vignette: soft black at the top and bottom 160px of the viewport ---- */
+.vignette-top,
+.vignette-bottom {
+  position: absolute;
+  inset-inline: 0;
+  height: 160px;
+  pointer-events: none;
+}
+.vignette-top {
+  top: 0;
+  background: linear-gradient(
+    to bottom,
+    rgb(0 0 0 / 0.6) 0%,
+    rgb(0 0 0 / 0.46) 22%,
+    rgb(0 0 0 / 0.28) 48%,
+    rgb(0 0 0 / 0.12) 74%,
+    rgb(0 0 0 / 0) 100%
+  );
+}
+.vignette-bottom {
+  bottom: 0;
+  background: linear-gradient(
+    to top,
+    rgb(0 0 0 / 0.6) 0%,
+    rgb(0 0 0 / 0.46) 22%,
+    rgb(0 0 0 / 0.28) 48%,
+    rgb(0 0 0 / 0.12) 74%,
+    rgb(0 0 0 / 0) 100%
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-rise,
+  [data-reveal].is-revealed {
+    animation: none;
+  }
+  .reveal-ready [data-reveal]:not(.is-revealed) {
+    opacity: 1;
+  }
 }

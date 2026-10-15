@@ -18,7 +18,7 @@ export function HeroMedia({ media }: { media: Media }) {
         fetchPriority="high"
         className="object-cover"
       />
-      {media.kind === "video" && <HeroVideo src={media.src} />}
+      {media.kind === "video" && <HeroVideo src={media.src} playbackRate={media.playbackRate} />}
     </div>
   );
 }

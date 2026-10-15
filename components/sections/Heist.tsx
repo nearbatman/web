@@ -18,6 +18,7 @@ export function Heist() {
           <ol className="mt-10 flex flex-col gap-7">
             {heist.beats.map((beat, i) => (
               <li
+                data-reveal
                 key={beat}
                 className={`relative border-2 border-ink bg-bone px-6 pt-9 pb-5 text-ink shadow-[6px_6px_0_0_var(--color-signal)] ${placement[i]}`}
               >
@@ -29,7 +30,7 @@ export function Heist() {
             ))}
           </ol>
 
-          <p className="mt-9 text-[15px] leading-relaxed text-bone/70">
+          <p data-reveal className="mt-9 text-[15px] leading-relaxed text-bone/70">
             {noteLines.map((line) => (
               <span key={line} className="block">
                 {line}
@@ -38,7 +39,7 @@ export function Heist() {
           </p>
         </div>
 
-        <div className="lg:col-start-1 lg:row-start-1">
+        <div data-reveal className="lg:col-start-1 lg:row-start-1">
           <FilmPlayer />
         </div>
       </div>

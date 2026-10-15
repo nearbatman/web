@@ -14,6 +14,7 @@ export function Links() {
       <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-y-12 lg:grid-cols-[7fr_5fr] lg:gap-x-16 items-center">
         <div className="lg:col-start-2 lg:row-start-1">
           <a
+            data-reveal
             href={links.irlPost}
             target="_blank"
             rel="noopener noreferrer"
@@ -37,7 +38,7 @@ export function Links() {
 
         <ul className="border-y-2 border-bone lg:col-start-1 lg:row-start-1">
           {linkList.items.map((item) => (
-            <li key={item.href} className="border-b-2 border-bone/25 last:border-b-0">
+            <li data-reveal key={item.href} className="border-b-2 border-bone/25 last:border-b-0">
               <a
                 href={item.href}
                 target="_blank"

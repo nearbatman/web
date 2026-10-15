@@ -44,6 +44,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body>
         {children}
         <div aria-hidden className="grain" />
+        <div aria-hidden className="page-veil" />
       </body>
     </html>
   );

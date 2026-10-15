@@ -14,6 +14,7 @@ export function Tokenomics() {
         <dl className="border-y-2 border-bone lg:col-start-1 lg:row-start-1">
           {tokenomics.rows.map((row) => (
             <div
+              data-reveal
               key={row.label}
               className="flex items-baseline justify-between gap-6 border-b-2 border-bone/25 py-5"
             >
@@ -25,7 +26,7 @@ export function Tokenomics() {
               </dd>
             </div>
           ))}
-          <div className="flex items-center justify-between gap-6 py-5">
+          <div data-reveal className="flex items-center justify-between gap-6 py-5">
             <dt className="text-[17px] text-bone/70">contract</dt>
             <dd>
               <CopyCA />
