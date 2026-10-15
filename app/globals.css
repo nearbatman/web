@@ -145,6 +145,16 @@ section[id] {
   animation-delay: var(--reveal-delay, 0ms);
 }
 
+/* "batman is watching." — the final dot blinks like a text cursor */
+.cursor-blink {
+  animation: cursor-blink 1s steps(1) infinite;
+}
+@keyframes cursor-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
 /* ---- vignette: fixed to the viewport, soft black at the top and bottom edges.
    above the backdrop, hero and section content; below the header (z-40) and the footer (z-31) ---- */
 .vignette {
@@ -199,6 +209,9 @@ section[id] {
   }
   .page-veil {
     display: none;
+  }
+  .cursor-blink {
+    animation: none;
   }
   .reveal-ready [data-reveal]:not(.is-revealed) {
     opacity: 1;

@@ -21,7 +21,7 @@ export const token = {
 };
 
 export const links = {
-  buy: "https://app.rhea.finance/#near|batman-4.nearlytrade.near",
+  buy: "https://nearly.trade/batman-4.nearlytrade.near",
   x: "https://x.com/BatmanDogNear",
   dexscreener: "https://dexscreener.com/near/refv2-batman-4.nearlytrade.near:wrap.near:10000",
   nearblocks: "https://nearblocks.io/tokens/batman-4.nearlytrade.near",
@@ -116,10 +116,12 @@ export const tokenomics = {
 
 export const howToBuy = {
   heading: "how to join us",
+  // this word inside a step becomes the green buy link
+  buyLinkText: "nearly.trade",
   steps: [
     "get a near wallet (meteor or hot)",
     "buy some near",
-    "swap near for $BATMAN on rhea, paste the CA if it doesn't show up",
+    "swap near for $BATMAN on nearly.trade, paste the CA if it doesn't show up",
   ],
 };
 
@@ -134,7 +136,7 @@ export const linkList = {
   },
   items: [
     { label: "X", href: links.x },
-    { label: "rhea", href: links.buy },
+    { label: "nearly.trade", href: links.buy },
     { label: "dexscreener", href: links.dexscreener },
     { label: "nearblocks", href: links.nearblocks },
   ],

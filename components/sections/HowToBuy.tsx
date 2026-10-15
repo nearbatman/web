@@ -2,9 +2,9 @@ import { howToBuy, links } from "@/content";
 import { CopyCA } from "@/components/ui/CopyCA";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
-// "rhea" inside a step becomes a link, the rest of the string stays as written in content.ts
+// howToBuy.buyLinkText inside a step becomes a link, the rest of the string stays as written in content.ts
 function StepText({ text }: { text: string }) {
-  const [before, ...after] = text.split("rhea");
+  const [before, ...after] = text.split(howToBuy.buyLinkText);
   if (!after.length) return <>{text}</>;
   return (
     <>
@@ -13,11 +13,11 @@ function StepText({ text }: { text: string }) {
         href={links.buy}
         target="_blank"
         rel="noopener noreferrer"
-        className="relative text-signal underline after:absolute after:-inset-x-2 after:-inset-y-3 after:content-['']  decoration-2 underline-offset-4 hover:text-bone focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-bone"
+        className="relative text-signal underline after:absolute after:-inset-x-2 after:-inset-y-3 after:content-[''] decoration-2 underline-offset-4 hover:text-bone focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-bone"
       >
-        rhea
+        {howToBuy.buyLinkText}
       </a>
-      {after.join("rhea")}
+      {after.join(howToBuy.buyLinkText)}
     </>
   );
 }

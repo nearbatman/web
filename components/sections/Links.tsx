@@ -7,6 +7,9 @@ import { ArrowUpRightIcon } from "@/components/ui/icons";
 const cut = linkList.heading.lastIndexOf(" ");
 const headingStart = linkList.heading.slice(0, cut);
 const headingEnd = linkList.heading.slice(cut + 1);
+// a trailing "." blinks like a text cursor
+const endsWithDot = headingEnd.endsWith(".");
+const headingWord = endsWithDot ? headingEnd.slice(0, -1) : headingEnd;
 
 export function Links() {
   return (
@@ -33,7 +36,11 @@ export function Links() {
           </a>
           <div className="max-lg:order-1">
             <SectionHeading>
-              {headingStart} <span className="text-signal">{headingEnd}</span>
+              {headingStart}{" "}
+              <span className="text-signal">
+                {headingWord}
+                {endsWithDot && <span className="cursor-blink">.</span>}
+              </span>
             </SectionHeading>
           </div>
         </div>
