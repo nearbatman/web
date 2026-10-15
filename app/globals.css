@@ -197,6 +197,9 @@ section[id] {
   [data-reveal].is-revealed {
     animation: none;
   }
+  .page-veil {
+    display: none;
+  }
   .reveal-ready [data-reveal]:not(.is-revealed) {
     opacity: 1;
   }

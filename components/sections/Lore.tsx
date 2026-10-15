@@ -36,7 +36,7 @@ export function Lore() {
             alt={lore.post.alt}
             width={lore.post.width}
             height={lore.post.height}
-            sizes="480px"
+            sizes="(min-width: 528px) 480px, calc(100vw - 48px)"
             quality={90}
             className="h-auto w-full"
           />

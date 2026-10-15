@@ -1,10 +1,11 @@
 "use client";
 
+import Image from "next/image";
 import { useRef, useState } from "react";
 import { heist } from "@/content";
 
-// poster first, nothing downloads (preload none) until the click; the click is the
-// user gesture that lets the video start with sound
+// poster first (a lazy next/image, so it arrives as avif/webp at the right size), nothing
+// downloads (preload none) until the click; the click is the user gesture that lets the video start with sound
 export function FilmPlayer() {
   const ref = useRef<HTMLVideoElement>(null);
   const [started, setStarted] = useState(false);
@@ -22,12 +23,20 @@ export function FilmPlayer() {
       <video
         ref={ref}
         src={heist.film.src}
-        poster={heist.film.poster}
         preload="none"
         playsInline
         controls={started}
         className="h-full w-full object-cover"
       />
+      {!started && (
+        <Image
+          src={heist.film.poster}
+          alt=""
+          fill
+          sizes="(min-width: 1024px) 760px, calc(100vw - 48px)"
+          className="object-cover"
+        />
+      )}
       {!started && (
         <button
           type="button"

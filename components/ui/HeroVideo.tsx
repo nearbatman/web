@@ -8,10 +8,27 @@ import { useEffect, useRef, useState } from "react";
 export function HeroVideo({ src, playbackRate = 1 }: { src: string; playbackRate?: number }) {
   const ref = useRef<HTMLVideoElement>(null);
   const [playing, setPlaying] = useState(false);
+  // the source is attached only after the page has loaded, so 1.5 MB of video never competes
+  // with fonts, css and the still for first paint. reduced-motion users never download it.
+  const [ready, setReady] = useState(false);
+
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    let timer = 0;
+    const go = () => {
+      timer = window.setTimeout(() => setReady(true), 0);
+    };
+    if (document.readyState === "complete") go();
+    else window.addEventListener("load", go, { once: true });
+    return () => {
+      window.removeEventListener("load", go);
+      window.clearTimeout(timer);
+    };
+  }, []);
 
   useEffect(() => {
     const video = ref.current;
-    if (!video) return;
+    if (!video || !ready) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     video.muted = true;
 
@@ -36,12 +53,12 @@ export function HeroVideo({ src, playbackRate = 1 }: { src: string; playbackRate
       observer.disconnect();
       rateEvents.forEach((name) => video.removeEventListener(name, applyRate));
     };
-  }, [playbackRate]);
+  }, [playbackRate, ready]);
 
   return (
     <video
       ref={ref}
-      src={src}
+      src={ready ? src : undefined}
       muted
       loop
       playsInline

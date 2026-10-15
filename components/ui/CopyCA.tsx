@@ -70,15 +70,17 @@ export function CopyCA({ className = "", variant = "hero" }: { className?: strin
       <button
         type="button"
         onClick={handleClick}
-        aria-label={`${copyCa.copy}: ${token.ca}`}
         className={`${box} inline-flex min-w-0 items-center border-2 border-bone bg-night/80 text-bone transition-[background-color,scale] duration-150 ease-(--ease-out-strong) hover:bg-night focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-bone fine:active:scale-[0.98]`}
       >
-        <span className={`font-medium text-bone/70 ${variant === "hero" ? "" : "max-md:hidden"}`}>{copyCa.label}</span>
+        <span className={`font-medium text-bone/70 ${variant === "hero" ? "" : "max-md:hidden"}`}>{copyCa.label}</span>{" "}
         {isInline ? (
-          <span ref={addressRef} className="flex min-w-0 text-left whitespace-nowrap select-all">
-            <span className="min-w-0 truncate">{head}</span>
-            <span>{tail}</span>
-          </span>
+          <>
+            <span ref={addressRef} aria-hidden className="flex min-w-0 text-left whitespace-nowrap select-all">
+              <span className="min-w-0 truncate">{head}</span>
+              <span>{tail}</span>
+            </span>
+            <span className="sr-only">{token.ca}</span>
+          </>
         ) : (
           <span ref={addressRef} className={`min-w-0 text-left select-all ${variant === "hero" ? "break-all" : "break-words"}`}>
             {token.ca}
@@ -96,6 +98,7 @@ export function CopyCA({ className = "", variant = "hero" }: { className?: strin
             <CopyIcon className={`text-bone/70 ${isInline ? "max-md:size-3.5" : ""}`} />
           )}
         </span>
+        <span className="sr-only">, {copyCa.copy}</span>
       </button>
       <span aria-live="polite" className="sr-only">
         {status === "copied" ? copyCa.copied : status === "failed" ? copyCa.failed : ""}

@@ -26,7 +26,7 @@ export function Links() {
               alt={linkList.irl.alt}
               width={linkList.irl.width}
               height={linkList.irl.height}
-              sizes="440px"
+              sizes="(min-width: 488px) 440px, calc(100vw - 48px)"
               quality={90}
               className="h-auto w-full"
             />

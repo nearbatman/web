@@ -8,6 +8,7 @@ export type HeroMedia =
 export const site = {
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
   title: "$BATMAN — near's co-founder's corgi",
+  ticker: "$BATMAN",
   description: "batman is the corgi of near's co-founder. now he's a memecoin on near.",
 };
 
@@ -23,7 +24,7 @@ export const links = {
   buy: "https://app.rhea.finance/#near|batman-4.nearlytrade.near",
   x: "https://x.com/BatmanDogNear",
   dexscreener: "https://dexscreener.com/near/refv2-batman-4.nearlytrade.near:wrap.near:10000",
-  nearblocks: "https://nearblocks.io/token/batman-4.nearlytrade.near",
+  nearblocks: "https://nearblocks.io/tokens/batman-4.nearlytrade.near",
   skidanovPost: "https://x.com/AlexSkidanov/status/2110408460735246583",
   irlPost: "https://x.com/AlexSkidanov/status/2106115398865494404",
 };
@@ -144,4 +145,10 @@ export const footer = {
     "$BATMAN is a memecoin with no intrinsic value or expectation of financial return. not affiliated with near foundation or alex skidanov. not financial advice.",
   copyright: "© 2026 batman",
   xLabel: "batman on x",
+};
+
+export const notFound = {
+  title: "lost the trail",
+  line: "batman lost the trail.",
+  home: "back to base",
 };
