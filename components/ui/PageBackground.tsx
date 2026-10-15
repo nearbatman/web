@@ -94,8 +94,6 @@ export function PageBackground() {
           }}
         />
       </div>
-      <div className="vignette-top" />
-      <div className="vignette-bottom" />
       <div
         ref={fade}
         className="absolute inset-x-0 top-0 will-change-transform"

@@ -8,9 +8,9 @@ type Props = {
 };
 
 const sizes = {
-  md: "h-16 px-8 text-[30px] shadow-[5px_5px_0_0_var(--color-bone)] hover:translate-x-[5px] hover:translate-y-[5px] hover:shadow-[0_0_0_0_var(--color-bone)] active:translate-x-[5px] active:translate-y-[5px] active:shadow-[0_0_0_0_var(--color-bone)]",
-  sm: "h-11 px-4 sm:px-5 text-[22px] shadow-[3px_3px_0_0_var(--color-bone)] hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-[0_0_0_0_var(--color-bone)] active:translate-x-[3px] active:translate-y-[3px] active:shadow-[0_0_0_0_var(--color-bone)]",
-  xs: "h-11 px-4 md:h-9 text-[18px] shadow-[2px_2px_0_0_var(--color-bone)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[0_0_0_0_var(--color-bone)] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[0_0_0_0_var(--color-bone)]",
+  md: "h-16 px-8 text-[30px] shadow-[5px_5px_0_0_var(--color-bone)] fine:hover:translate-x-[5px] fine:hover:translate-y-[5px] fine:hover:shadow-[0_0_0_0_var(--color-bone)] fine:active:translate-x-[5px] fine:active:translate-y-[5px] fine:active:shadow-[0_0_0_0_var(--color-bone)]",
+  sm: "h-11 px-4 sm:px-5 text-[22px] shadow-[3px_3px_0_0_var(--color-bone)] fine:hover:translate-x-[3px] fine:hover:translate-y-[3px] fine:hover:shadow-[0_0_0_0_var(--color-bone)] fine:active:translate-x-[3px] fine:active:translate-y-[3px] fine:active:shadow-[0_0_0_0_var(--color-bone)]",
+  xs: "h-11 px-4 md:h-9 text-[18px] shadow-[2px_2px_0_0_var(--color-bone)] fine:hover:translate-x-[2px] fine:hover:translate-y-[2px] fine:hover:shadow-[0_0_0_0_var(--color-bone)] fine:active:translate-x-[2px] fine:active:translate-y-[2px] fine:active:shadow-[0_0_0_0_var(--color-bone)]",
 };
 
 // green slab with a hard bone "print" shadow; pressing drops it into the shadow

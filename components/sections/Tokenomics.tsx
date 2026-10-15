@@ -26,10 +26,10 @@ export function Tokenomics() {
               </dd>
             </div>
           ))}
-          <div data-reveal className="flex flex-col items-stretch gap-3 py-5 sm:flex-row sm:items-center sm:justify-between sm:gap-6">
-            <dt className="text-[17px] text-bone/70">contract</dt>
-            <dd className="min-w-0">
-              <CopyCA />
+          <div data-reveal className="flex items-center justify-between gap-3 py-5 sm:gap-6">
+            <dt className="shrink-0 text-[17px] text-bone/70">contract</dt>
+            <dd className="ml-auto min-w-0">
+              <CopyCA variant="inline" />
             </dd>
           </div>
         </dl>

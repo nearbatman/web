@@ -15,9 +15,6 @@ export function Hero() {
         className="halftone absolute inset-x-0 bottom-0 -z-10 h-[40%] mask-[linear-gradient(to_top,black_15%,transparent)]"
       />
 
-      <div aria-hidden className="vignette-top -z-10" />
-      <div aria-hidden className="vignette-bottom -z-10" />
-
       <div className="w-full px-[clamp(24px,5vw,112px)] min-[1921px]:pl-[calc((100%-1400px)/2)] pb-[clamp(40px,10vh,128px)] short-mobile:pb-8">
         <h1
           className="hero-rise font-display text-[clamp(72px,24vw,104px)] short-mobile:text-[64px] md:text-[clamp(104px,12vw,307px)] leading-[0.78] font-black tracking-[-0.01em] text-bone [text-shadow:0.035em_0.035em_0_var(--color-ink)]"

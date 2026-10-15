@@ -29,7 +29,8 @@ async function writeClipboard(text: string) {
   return ok;
 }
 
-export function CopyCA({ className = "" }: { className?: string }) {
+// variants "row" / "inline" sit in a row/step that already says "contract", so the "ca" prefix is dropped on mobile
+export function CopyCA({ className = "", variant = "hero" }: { className?: string; variant?: "hero" | "row" | "inline" }) {
   const [status, setStatus] = useState<Status>("idle");
   const addressRef = useRef<HTMLSpanElement>(null);
   const timer = useRef<number | undefined>(undefined);
@@ -51,26 +52,48 @@ export function CopyCA({ className = "" }: { className?: string }) {
     timer.current = window.setTimeout(() => setStatus("idle"), ok ? 1600 : 4000);
   }
 
+  const isInline = variant === "inline";
+  // "inline": compact pill that shares a line with its label below md; the address is
+  // middle-truncated on screen when the row is tight (copy always uses the full token.ca)
+  const box = {
+    hero: "short-mobile:min-h-12 short-mobile:text-[13px] max-sm:flex-1 gap-3 py-2 pr-4 pl-4 min-h-13 text-[15px] sm:min-h-16 sm:gap-4 sm:pr-5 sm:pl-6 sm:text-[17px]",
+    row: "gap-2.5 py-3 pr-3.5 pl-3.5 min-h-13 text-[15px] sm:min-h-16 sm:gap-4 sm:py-2 sm:pr-5 sm:pl-6 sm:text-[17px]",
+    inline: "gap-2 py-2 pr-2.5 pl-2.5 text-[11px] md:min-h-16 md:gap-4 md:pr-5 md:pl-6 md:text-[17px]",
+  }[variant];
+  const head = token.ca.slice(0, -10);
+  const tail = token.ca.slice(-10);
+
   return (
-    <div className={`flex max-w-full sm:inline-flex ${className}`}>
+    <div
+      className={`max-w-full ${variant === "hero" ? "flex sm:inline-flex" : "inline-flex"} ${isInline ? "min-w-0" : ""} ${className}`}
+    >
       <button
         type="button"
         onClick={handleClick}
         aria-label={`${copyCa.copy}: ${token.ca}`}
-        className="inline-flex min-h-16 short-mobile:min-h-12 min-w-0 max-sm:flex-1 items-center gap-3 border-2 border-bone bg-night/80 py-2 pr-4 pl-4 text-[13px] sm:gap-4 sm:pr-5 sm:pl-6 sm:text-[17px] text-bone transition-[background-color,scale] duration-150 ease-(--ease-out-strong) hover:bg-night focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-bone active:scale-[0.98]"
+        className={`${box} inline-flex min-w-0 items-center border-2 border-bone bg-night/80 text-bone transition-[background-color,scale] duration-150 ease-(--ease-out-strong) hover:bg-night focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-bone fine:active:scale-[0.98]`}
       >
-        <span className="font-medium text-bone/70">{copyCa.label}</span>
-        <span ref={addressRef} className="min-w-0 break-all text-left select-all">
-          {token.ca}
-        </span>
-        <span className="ml-auto inline-flex shrink-0 items-center justify-end gap-1.5 text-[12px] font-medium sm:min-w-[84px] sm:text-[14px]">
+        <span className={`font-medium text-bone/70 ${variant === "hero" ? "" : "max-md:hidden"}`}>{copyCa.label}</span>
+        {isInline ? (
+          <span ref={addressRef} className="flex min-w-0 text-left whitespace-nowrap select-all">
+            <span className="min-w-0 truncate">{head}</span>
+            <span>{tail}</span>
+          </span>
+        ) : (
+          <span ref={addressRef} className={`min-w-0 text-left select-all ${variant === "hero" ? "break-all" : "break-words"}`}>
+            {token.ca}
+          </span>
+        )}
+        <span
+          className={`ml-auto inline-flex shrink-0 items-center justify-end gap-1.5 text-[12px] font-medium sm:min-w-[84px] sm:text-[14px] ${isInline ? "max-md:min-w-0 max-md:text-[10px]" : ""}`}
+        >
           {status === "copied" ? (
             <>
-              <CheckIcon className="text-signal" />
+              <CheckIcon className={`text-signal ${isInline ? "max-md:size-3.5" : ""}`} />
               {copyCa.copied}
             </>
           ) : (
-            <CopyIcon className="text-bone/70" />
+            <CopyIcon className={`text-bone/70 ${isInline ? "max-md:size-3.5" : ""}`} />
           )}
         </span>
       </button>

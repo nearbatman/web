@@ -18,6 +18,9 @@
 /* small phones in portrait (e.g. iPhone SE): hero text block gets compacted */
 @custom-variant short-mobile (@media (max-width: 767px) and (max-height: 720px));
 
+/* mouse-like devices only: press/hover "push into shadow" never runs on touch */
+@custom-variant fine (@media (hover: hover) and (pointer: fine));
+
 html {
   background: var(--color-night);
 }
@@ -142,33 +145,49 @@ section[id] {
   animation-delay: var(--reveal-delay, 0ms);
 }
 
-/* ---- vignette: soft black at the top and bottom 160px of the viewport ---- */
-.vignette-top,
-.vignette-bottom {
-  position: absolute;
-  inset-inline: 0;
-  height: 160px;
+/* ---- vignette: fixed to the viewport, soft black at the top and bottom edges.
+   above the backdrop, hero and section content; below the header (z-40) and the footer (z-31) ---- */
+.vignette {
+  --vignette-top-h: 120px;
+  --vignette-bottom-h: 100px;
+  position: fixed;
+  inset: 0;
+  z-index: 30;
   pointer-events: none;
 }
-.vignette-top {
+@media (min-width: 768px) {
+  .vignette {
+    --vignette-top-h: 200px;
+    --vignette-bottom-h: 160px;
+  }
+}
+.vignette::before,
+.vignette::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+}
+.vignette::before {
   top: 0;
+  height: var(--vignette-top-h);
   background: linear-gradient(
     to bottom,
-    rgb(0 0 0 / 0.6) 0%,
-    rgb(0 0 0 / 0.46) 22%,
-    rgb(0 0 0 / 0.28) 48%,
-    rgb(0 0 0 / 0.12) 74%,
+    rgb(0 0 0 / 0.9) 0%,
+    rgb(0 0 0 / 0.69) 22%,
+    rgb(0 0 0 / 0.42) 48%,
+    rgb(0 0 0 / 0.18) 74%,
     rgb(0 0 0 / 0) 100%
   );
 }
-.vignette-bottom {
+.vignette::after {
   bottom: 0;
+  height: var(--vignette-bottom-h);
   background: linear-gradient(
     to top,
-    rgb(0 0 0 / 0.6) 0%,
-    rgb(0 0 0 / 0.46) 22%,
-    rgb(0 0 0 / 0.28) 48%,
-    rgb(0 0 0 / 0.12) 74%,
+    rgb(0 0 0 / 0.8) 0%,
+    rgb(0 0 0 / 0.62) 22%,
+    rgb(0 0 0 / 0.38) 48%,
+    rgb(0 0 0 / 0.16) 74%,
     rgb(0 0 0 / 0) 100%
   );
 }

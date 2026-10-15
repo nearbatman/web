@@ -52,11 +52,11 @@ export function HowToBuy() {
               >
                 {i + 1}
               </span>
-              <div>
+              <div className="min-w-0">
                 <p className="text-[clamp(18px,1.4vw,26px)] leading-[1.5]">
                   <StepText text={step} />
                 </p>
-                {i === last && <CopyCA className="mt-6" />}
+                {i === last && <CopyCA variant="row" className="mt-5 sm:mt-6" />}
               </div>
             </li>
           ))}

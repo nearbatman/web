@@ -43,6 +43,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html lang="en" className={`${bigShoulders.variable} ${plexMono.variable}`}>
       <body>
         {children}
+        <div aria-hidden className="vignette" />
         <div aria-hidden className="grain" />
         <div aria-hidden className="page-veil" />
       </body>
