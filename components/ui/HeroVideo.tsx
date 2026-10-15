@@ -47,7 +47,7 @@ export function HeroVideo({ src, playbackRate = 1 }: { src: string; playbackRate
       playsInline
       preload="auto"
       onPlaying={() => setPlaying(true)}
-      className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${playing ? "opacity-100" : "opacity-0"}`}
+      className={`absolute inset-0 h-full w-full object-cover object-[66%_50%] md:object-center transition-opacity duration-700 ${playing ? "opacity-100" : "opacity-0"}`}
     />
   );
 }

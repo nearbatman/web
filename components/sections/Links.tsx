@@ -10,16 +10,16 @@ const headingEnd = linkList.heading.slice(cut + 1);
 
 export function Links() {
   return (
-    <section id="links" className="px-[clamp(24px,5vw,112px)] py-[clamp(56px,9.375vw,180px)]">
+    <section id="links" className="px-[clamp(24px,5vw,112px)] py-[72px] md:py-[clamp(56px,9.375vw,180px)]">
       <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-y-12 lg:grid-cols-[7fr_5fr] lg:gap-x-16 items-center">
-        <div className="lg:col-start-2 lg:row-start-1">
+        <div className="max-lg:contents lg:col-start-2 lg:row-start-1">
           <a
             data-reveal
             href={links.irlPost}
             target="_blank"
             rel="noopener noreferrer"
             aria-label={linkList.irl.linkLabel}
-            className="group mb-12 block w-full max-w-[440px] -rotate-2 border-2 border-bone bg-ink shadow-[10px_10px_0_0_var(--color-signal)] transition-[rotate,translate,box-shadow] duration-300 ease-(--ease-out-strong) hover:-translate-y-1 hover:rotate-0 hover:shadow-[14px_14px_0_0_var(--color-signal)] focus-visible:outline-2 focus-visible:outline-offset-8 focus-visible:outline-bone"
+            className="group block w-full max-w-[440px] -rotate-1 max-lg:order-3 lg:mb-12 lg:-rotate-2 border-2 border-bone bg-ink shadow-[8px_8px_0_0_var(--color-signal)] sm:shadow-[10px_10px_0_0_var(--color-signal)] transition-[rotate,translate,box-shadow] duration-300 ease-(--ease-out-strong) hover:-translate-y-1 hover:rotate-0 hover:shadow-[14px_14px_0_0_var(--color-signal)] focus-visible:outline-2 focus-visible:outline-offset-8 focus-visible:outline-bone"
           >
             <Image
               src={linkList.irl.src}
@@ -31,12 +31,14 @@ export function Links() {
               className="h-auto w-full"
             />
           </a>
-          <SectionHeading>
-            {headingStart} <span className="text-signal">{headingEnd}</span>
-          </SectionHeading>
+          <div className="max-lg:order-1">
+            <SectionHeading>
+              {headingStart} <span className="text-signal">{headingEnd}</span>
+            </SectionHeading>
+          </div>
         </div>
 
-        <ul className="border-y-2 border-bone lg:col-start-1 lg:row-start-1">
+        <ul className="border-y-2 border-bone max-lg:order-2 lg:col-start-1 lg:row-start-1">
           {linkList.items.map((item) => (
             <li data-reveal key={item.href} className="border-b-2 border-bone/25 last:border-b-0">
               <a

@@ -13,7 +13,7 @@ export function Footer() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label={footer.xLabel}
-            className="text-bone transition-colors duration-150 hover:text-signal focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-bone"
+            className="-m-3 p-3 text-bone transition-colors duration-150 hover:text-signal focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-bone"
           >
             <XIcon />
           </a>

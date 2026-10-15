@@ -16,7 +16,7 @@ export function HeroMedia({ media }: { media: Media }) {
         sizes="100vw"
         loading="eager"
         fetchPriority="high"
-        className="object-cover"
+        className="object-cover object-[66%_50%] md:object-center"
       />
       {media.kind === "video" && <HeroVideo src={media.src} playbackRate={media.playbackRate} />}
     </div>

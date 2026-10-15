@@ -31,7 +31,7 @@ export function Header() {
       />
       <header
         className={`fixed inset-x-0 top-0 z-40 border-b px-[clamp(24px,5vw,112px)] transition-[background-color,border-color,padding] duration-200 ease-out motion-reduce:transition-none ${
-          scrolled ? "border-bone/20 bg-night py-[9.5px]" : "border-transparent bg-transparent py-8"
+          scrolled ? "border-bone/20 bg-night py-[9.5px]" : "border-transparent bg-transparent py-4 sm:py-8"
         }`}
       >
         <div className="mx-auto flex max-w-[1400px] items-center justify-between">
