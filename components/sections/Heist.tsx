@@ -25,12 +25,12 @@ export function Heist() {
                 <span className="absolute -top-px -left-px border-2 border-ink bg-signal px-3 py-0.5 font-display text-[26px] leading-none font-extrabold">
                   {i + 1}
                 </span>
-                <p className="text-[clamp(16px,1.1vw,21px)] leading-[1.5] font-medium">{beat}</p>
+                <p className="text-[clamp(16px,1.1vw,28px)] leading-[1.5] font-medium">{beat}</p>
               </li>
             ))}
           </ol>
 
-          <p data-reveal className="mt-9 text-[15px] leading-relaxed text-bone/70">
+          <p data-reveal className="mt-9 text-[clamp(14px,0.78vw,20px)] leading-relaxed text-bone/70">
             {noteLines.map((line) => (
               <span key={line} className="block">
                 {line}

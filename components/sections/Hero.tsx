@@ -18,15 +18,15 @@ export function Hero() {
       <div aria-hidden className="vignette-top -z-10" />
       <div aria-hidden className="vignette-bottom -z-10" />
 
-      <div className="w-full px-[clamp(24px,5vw,112px)] pb-[clamp(56px,10vh,128px)]">
+      <div className="w-full px-[clamp(24px,5vw,112px)] min-[1921px]:pl-[calc((100%-1400px)/2)] pb-[clamp(56px,10vh,128px)]">
         <h1
-          className="hero-rise font-display text-[clamp(104px,12vw,248px)] leading-[0.78] font-black tracking-[-0.01em] text-bone [text-shadow:0.035em_0.035em_0_var(--color-ink)]"
+          className="hero-rise font-display text-[clamp(104px,12vw,307px)] leading-[0.78] font-black tracking-[-0.01em] text-bone [text-shadow:0.035em_0.035em_0_var(--color-ink)]"
           style={{ animationDelay: "300ms" }}
         >
           {hero.wordmark}
         </h1>
         <p
-          className="hero-rise mt-9 inline-block max-w-[36ch] -rotate-1 border-2 border-ink bg-bone px-4 py-2.5 text-[clamp(16px,1.1vw,21px)] leading-snug font-medium text-ink shadow-[4px_4px_0_0_var(--color-ink)]"
+          className="hero-rise mt-9 inline-block max-w-[36ch] -rotate-1 border-2 border-ink bg-bone px-4 py-2.5 text-[clamp(16px,1.1vw,28px)] leading-snug font-medium text-ink shadow-[4px_4px_0_0_var(--color-ink)]"
           style={{ animationDelay: "450ms" }}
         >
           {hero.sub}
