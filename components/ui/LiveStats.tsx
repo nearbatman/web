@@ -104,13 +104,13 @@ function useLiveStats() {
 
 function Tile({ label, value, loading, children }: { label: string; value: string; loading: boolean; children?: ReactNode }) {
   return (
-    <div className="flex flex-col justify-between gap-4 border-2 border-bone bg-night/80 px-5 py-5">
+    <div className="flex flex-auto flex-col justify-between gap-4 border-2 border-bone bg-night/80 px-4 py-5 sm:px-5">
       <dt className="text-[15px] text-bone/70">{label}</dt>
       <dd>
         {loading ? (
-          <span aria-hidden className="block h-[clamp(40px,3.4vw,64px)] w-[85%] animate-pulse bg-bone/15" />
+          <span aria-hidden className="block h-[clamp(36px,3vw,56px)] w-[85%] animate-pulse bg-bone/15" />
         ) : (
-          <span className="block font-display text-[clamp(40px,3.4vw,64px)] leading-none font-extrabold tabular-nums">
+          <span className="block font-display text-[clamp(36px,3vw,56px)] leading-none font-extrabold tabular-nums">
             {value}
           </span>
         )}
@@ -144,7 +144,7 @@ export function LiveStats() {
         </a>
       </div>
 
-      <dl aria-busy={loading} className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+      <dl aria-busy={loading} className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
         <Tile label={liveStats.marketCap} value={usdCompact(stats?.marketCap ?? null)} loading={loading} />
         <Tile label={liveStats.price} value={usdPrice(stats?.price ?? null)} loading={loading}>
           {change !== null && (

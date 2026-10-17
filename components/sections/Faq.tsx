@@ -61,41 +61,42 @@ export function Faq() {
             const isOpen = open === i;
             const buttonId = `${baseId}-q${i}`;
             const panelId = `${baseId}-a${i}`;
+            // the reveal class is added outside react, so the li's className must never change
             return (
-              <li
-                data-reveal
-                key={item.q}
-                className={`rounded-2xl border bg-night/70 transition-colors duration-200 ${isOpen ? "border-bone/50" : "border-bone/20 hover:border-bone/40"}`}
-              >
-                <h3>
-                  <button
-                    id={buttonId}
-                    type="button"
-                    aria-expanded={isOpen}
-                    aria-controls={panelId}
-                    onClick={() => setOpen(isOpen ? null : i)}
-                    className="flex w-full items-center justify-between gap-6 rounded-2xl px-5 py-5 text-left text-[clamp(17px,1.2vw,22px)] font-medium text-bone sm:px-7 sm:py-6 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bone"
-                  >
-                    {item.q}
-                    <PlusMinus open={isOpen} />
-                  </button>
-                </h3>
+              <li data-reveal key={item.q}>
                 <div
-                  id={panelId}
-                  role="region"
-                  aria-labelledby={buttonId}
-                  inert={!isOpen}
-                  className={`grid transition-[grid-template-rows,opacity] duration-300 ease-(--ease-out-strong) motion-reduce:transition-none ${isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}
+                  className={`rounded-2xl border bg-night/70 transition-colors duration-200 ${isOpen ? "border-bone/50" : "border-bone/20 hover:border-bone/40"}`}
                 >
-                  <div className="min-h-0 overflow-hidden">
-                    <div className="px-5 pb-6 sm:px-7 sm:pb-7">
-                      {item.ca ? (
-                        <CopyCA variant="row" />
-                      ) : (
-                        <p className="max-w-[60ch] text-[clamp(15px,1vw,19px)] leading-[1.6] text-bone/70">
-                          <AnswerText item={item} />
-                        </p>
-                      )}
+                  <h3>
+                    <button
+                      id={buttonId}
+                      type="button"
+                      aria-expanded={isOpen}
+                      aria-controls={panelId}
+                      onClick={() => setOpen(isOpen ? null : i)}
+                      className="flex w-full items-center justify-between gap-6 rounded-2xl px-5 py-5 text-left text-[clamp(17px,1.2vw,22px)] font-medium text-bone sm:px-7 sm:py-6 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bone"
+                    >
+                      {item.q}
+                      <PlusMinus open={isOpen} />
+                    </button>
+                  </h3>
+                  <div
+                    id={panelId}
+                    role="region"
+                    aria-labelledby={buttonId}
+                    inert={!isOpen}
+                    className={`grid transition-[grid-template-rows,opacity] duration-300 ease-(--ease-out-strong) motion-reduce:transition-none ${isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}
+                  >
+                    <div className="min-h-0 overflow-hidden">
+                      <div className="px-5 pb-6 sm:px-7 sm:pb-7">
+                        {item.ca ? (
+                          <CopyCA variant="row" />
+                        ) : (
+                          <p className="max-w-[60ch] text-[clamp(15px,1vw,19px)] leading-[1.6] text-bone/70">
+                            <AnswerText item={item} />
+                          </p>
+                        )}
+                      </div>
                     </div>
                   </div>
                 </div>
