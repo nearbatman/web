@@ -17,7 +17,9 @@ export default function Home() {
       <PageBackground />
       <Header />
       <Hero />
-      <main>
+      {/* same vertical padding as a section, so hero > first section and last section > footer
+          get the same gap as two sections */}
+      <main className="py-[72px] md:py-[clamp(56px,9.375vw,180px)]">
         <Lore />
         <Heist />
         <Tokenomics />

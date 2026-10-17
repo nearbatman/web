@@ -9,7 +9,7 @@ const FALLBACK_MS = 1500;
 // one observer for the whole page: every [data-reveal] element fades up once, the first time
 // ~15% of it is visible. elements that cross the threshold together are staggered 70ms apart.
 // the hidden state is only switched on here (html.reveal-ready), so without js nothing is hidden,
-// and the page-load veil covers that switch-on.
+// and on a first visit the page-load loader covers that switch-on.
 // elements react mounts later (a changed key, hot reload) are picked up by a mutation observer;
 // before that, a remounted element stayed at opacity 0 forever because nothing observed it.
 function useScrollReveal() {

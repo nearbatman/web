@@ -33,7 +33,7 @@ export function HowToBuy() {
   return (
     <section id="how-to-buy" className="px-[clamp(24px,5vw,112px)] py-[72px] md:py-[clamp(56px,9.375vw,180px)]">
       <div className="mx-auto grid max-w-[1400px] grid-cols-1 items-center gap-y-12 lg:grid-cols-[5fr_7fr] lg:gap-x-16">
-        <SectionHeading>
+        <SectionHeading shift={-0.0833}>
           {headingStart}
           <br />
           {headingEnd}

@@ -30,6 +30,26 @@ export const links = {
   irlPost: "https://x.com/AlexSkidanov/status/2106115398865494404",
 };
 
+// header logo: coin + wordmark. the page-load loader flies into exactly this.
+export const brand = {
+  coin: "/batman-coin.png",
+  wordmark: "BATMAN",
+};
+
+// plays on every page load; reduced-motion users never see it
+export const loader = {
+  safetyMs: 4000, // the overlay is removed after this no matter what
+};
+
+// centered header links (md+ only), each points at a section id
+export const nav = [
+  { label: "lore", href: "#lore" },
+  { label: "heist", href: "#heist" },
+  { label: "numbers", href: "#numbers" },
+  { label: "how to buy", href: "#how-to-buy" },
+  { label: "faq", href: "#faq" },
+];
+
 export const copyCa = {
   label: "ca",
   copy: "copy contract address",
@@ -125,9 +145,18 @@ export const liveStats = {
   price: "price",
   volume: "24h volume",
   change: "24h",
+  liquiditySeparator: "·",
   buys: "buys",
   sells: "sells",
   unavailable: "—",
+};
+
+// full-width chart under the numbers. nearly.trade refuses framing (x-frame-options: deny) and
+// dexscreener's embed never got past "loading", so it's geckoterminal's embed of the main pool
+// (BATMAN / wNEAR on rhea, the same pair the live stats read).
+export const chart = {
+  src: "https://www.geckoterminal.com/near/pools/refv2-batman-4.nearlytrade.near:wrap.near:10000?embed=1&info=0&swaps=0",
+  title: "$BATMAN price chart on geckoterminal",
 };
 
 export const howToBuy = {

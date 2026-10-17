@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Big_Shoulders, IBM_Plex_Mono } from "next/font/google";
 import { site } from "@/content";
+import { Loader, loaderBootScript } from "@/components/layout/Loader";
 import "./globals.css";
 
 const bigShoulders = Big_Shoulders({
@@ -43,12 +44,14 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${bigShoulders.variable} ${plexMono.variable}`}>
+    // the boot script may add html.loader-active before react hydrates
+    <html lang="en" className={`${bigShoulders.variable} ${plexMono.variable}`} suppressHydrationWarning>
       <body>
+        <script dangerouslySetInnerHTML={{ __html: loaderBootScript }} />
+        <Loader />
         {children}
         <div aria-hidden className="vignette" />
         <div aria-hidden className="grain" />
-        <div aria-hidden className="page-veil" />
       </body>
     </html>
   );

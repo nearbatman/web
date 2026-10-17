@@ -1,6 +1,6 @@
 "use client";
 
-import { useId, useState } from "react";
+import { useId, useState, type CSSProperties } from "react";
 import { faq, type FaqItem } from "@/content";
 import { CopyCA } from "@/components/ui/CopyCA";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -50,7 +50,8 @@ export function Faq() {
   return (
     <section id="faq" className="px-[clamp(24px,5vw,112px)] py-[72px] md:py-[clamp(56px,9.375vw,180px)]">
       <div className="mx-auto grid max-w-[1400px] grid-cols-1 items-center gap-y-12 lg:grid-cols-[7fr_5fr] lg:gap-x-16">
-        <div className="lg:col-start-2 lg:row-start-1">
+        {/* heading + sub are centered together on the items */}
+        <div className="optical-center lg:col-start-2 lg:row-start-1" style={{ "--shift": 0.0229 } as CSSProperties}>
           <SectionHeading>{faq.heading}</SectionHeading>
           <p data-reveal className="mt-5 text-[clamp(17px,1.2vw,22px)] text-bone/70 sm:mt-7">
             {faq.sub}

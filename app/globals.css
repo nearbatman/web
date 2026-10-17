@@ -13,6 +13,7 @@
 :root {
   color-scheme: dark;
   --header-h: 56px;
+  --heading-size: clamp(48px, 5vw, 96px);
   --ease-out-strong: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -24,6 +25,12 @@
 
 html {
   background: var(--color-night);
+  scroll-behavior: smooth;
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 /* body stays transparent so the fixed page backdrop (z -10) shows through; html paints the night color */
@@ -67,6 +74,16 @@ section[id] {
   scroll-margin-top: var(--header-h);
 }
 
+/* optical centering for headings vertically centered against a block (lg+ zigzag only).
+   grid centering lines up line boxes; this nudges the visible glyphs (ascenders, descenders,
+   a dimmer sub line) onto the block's visual center. --shift is in heading font sizes, measured
+   per heading text at 1920x1080 (glyph center vs block center within 2px); re-measure if the copy changes. */
+@media (min-width: 1024px) {
+  .optical-center {
+    translate: 0 calc(var(--heading-size) * var(--shift, 0));
+  }
+}
+
 /* hero fog: two big soft banks in the lower half, drifting sideways at different speeds */
 .fog {
   position: absolute;
@@ -101,23 +118,20 @@ section[id] {
   }
 }
 
-/* ---- page load: night veil fades out like coming out of a shadow ---- */
-.page-veil {
-  position: fixed;
-  inset: 0;
-  z-index: 100;
-  pointer-events: none;
-  background: var(--color-night);
-  animation: veil-out 700ms ease-out 120ms forwards;
+/* ---- page-load loader (first visit per session). html.loader-active is set by the boot
+   script in layout.tsx and removed when the logo lands, or by its safety timer ---- */
+.loader {
+  display: none;
 }
-@keyframes veil-out {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-    visibility: hidden;
-  }
+.loader-active .loader {
+  display: block;
+}
+/* the flying logo lands here, so the real one waits; the hero entrance waits too */
+.loader-active [data-header-logo] {
+  visibility: hidden;
+}
+.loader-active .hero-rise {
+  animation-play-state: paused;
 }
 
 /* ---- shared rise-in: fade + 16px up ---- */
@@ -240,9 +254,6 @@ section[id] {
   .hero-rise,
   [data-reveal].is-revealed {
     animation: none;
-  }
-  .page-veil {
-    display: none;
   }
   .cursor-blink,
   .live-dot::after {
