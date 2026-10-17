@@ -24,6 +24,14 @@ export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: { default: site.title, template: `%s | ${site.ticker}` },
   description: site.description,
+  icons: {
+    icon: [
+      { url: "/batman-favicon-v2.ico", sizes: "any", type: "image/x-icon" },
+      { url: "/batman-icon-v2.png", sizes: "192x192", type: "image/png" },
+    ],
+    shortcut: "/batman-favicon-v2.ico",
+    apple: "/batman-apple-icon-v2.png",
+  },
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
