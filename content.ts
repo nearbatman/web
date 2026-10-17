@@ -25,7 +25,7 @@ export const links = {
   x: "https://x.com/BatmanDogNear",
   dexscreener: "https://dexscreener.com/near/refv2-batman-4.nearlytrade.near:wrap.near:10000",
   nearblocks: "https://nearblocks.io/tokens/batman-4.nearlytrade.near",
-  skidanovPost: "https://x.com/AlexSkidanov/status/2110408460735246583",
+  skidanovPost: "https://x.com/AlexSkidanov/status/2099238589989265664",
   irlPost: "https://x.com/AlexSkidanov/status/2106115398865494404",
 };
 
@@ -82,9 +82,9 @@ export const lore = {
   body: "alex skidanov co-founded near. alex has a corgi. the corgi's name is batman. that's the lore. that's the whole lore.",
   post: {
     src: "/skidanov-post.png",
-    alt: "alex skidanov's post on x: \"BATMAN!!! so resemblance. such uncanny\" with a photo of his corgi",
-    width: 598,
-    height: 699,
+    alt: "alex skidanov's post on x: \"Batman is the chunker at the bottom left. He was a puppy when the article was written in 2016, old man now.\" with a photo of batman and three other corgis",
+    width: 617,
+    height: 650,
     linkLabel: "open alex skidanov's post on x",
   },
 };
@@ -114,6 +114,19 @@ export const tokenomics = {
   ],
 };
 
+// live market tiles above the tokenomics table, fetched client-side from dexscreener
+export const liveStats = {
+  endpoint: "https://api.dexscreener.com/latest/dex/pairs/near/refv2-batman-4.nearlytrade.near:wrap.near:10000",
+  refreshMs: 30_000,
+  label: "live",
+  source: "via dexscreener",
+  marketCap: "market cap",
+  price: "price",
+  volume: "24h volume",
+  change: "24h",
+  unavailable: "—",
+};
+
 export const howToBuy = {
   heading: "how to join us",
   // this word inside a step becomes the green buy link
@@ -123,6 +136,48 @@ export const howToBuy = {
     "buy some near",
     "swap near for $BATMAN on nearly.trade, paste the CA if it doesn't show up",
   ],
+};
+
+export type FaqItem = {
+  q: string;
+  a: string;
+  // this text inside the answer becomes a green link
+  link?: { text: string; href: string };
+  // show the copy-the-contract pill under the answer
+  ca?: boolean;
+};
+
+export const faq = {
+  heading: "faqs",
+  sub: "frequently barked questions.",
+  items: [
+    {
+      q: "is this affiliated with near or alex skidanov?",
+      a: "no. batman is a real corgi owned by near's co-founder. $BATMAN is a community memecoin, not affiliated with near foundation or alex skidanov.",
+    },
+    {
+      q: "is batman a real dog?",
+      a: "very real. very chunky. see the post above.",
+    },
+    {
+      q: "what's the contract address?",
+      a: "batman-4.nearlytrade.near",
+      ca: true,
+    },
+    {
+      q: "where can i buy?",
+      a: "on nearly.trade. get a near wallet, buy some near, swap for $BATMAN.",
+      link: { text: "nearly.trade", href: links.buy },
+    },
+    {
+      q: "is liquidity locked?",
+      a: "yes, liquidity is locked.",
+    },
+    {
+      q: "will it go up?",
+      a: "batman doesn't do price predictions. he does naps. not financial advice.",
+    },
+  ] satisfies FaqItem[],
 };
 
 export const linkList = {

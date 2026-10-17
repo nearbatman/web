@@ -1,5 +1,6 @@
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
+import { Faq } from "@/components/sections/Faq";
 import { Heist } from "@/components/sections/Heist";
 import { Hero } from "@/components/sections/Hero";
 import { HowToBuy } from "@/components/sections/HowToBuy";
@@ -23,6 +24,7 @@ export default function Home() {
         <Heist />
         <Tokenomics />
         <HowToBuy />
+        <Faq />
         <Links />
       </main>
       <Footer />

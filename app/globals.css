@@ -61,11 +61,6 @@ body {
     linear-gradient(90deg, rgb(11 11 15 / 0.8) 0%, rgb(11 11 15 / 0.45) 30%, rgb(11 11 15 / 0) 56%);
 }
 
-/* keep anchored sections clear of the fixed header (~77px when scrolled) */
-section[id] {
-  scroll-margin-top: 80px;
-}
-
 /* hero fog: two big soft banks in the lower half, drifting sideways at different speeds */
 .fog {
   position: absolute;
@@ -155,6 +150,39 @@ section[id] {
   }
 }
 
+/* live stats: green dot with a ring that pulses out of it */
+.live-dot {
+  position: relative;
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  background: var(--color-signal);
+}
+.live-dot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: inherit;
+  animation: live-pulse 1.6s ease-out infinite;
+}
+.live-dot.is-off {
+  background: rgb(237 234 228 / 0.35);
+}
+.live-dot.is-off::after {
+  animation: none;
+}
+@keyframes live-pulse {
+  from {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  to {
+    transform: scale(2.8);
+    opacity: 0;
+  }
+}
+
 /* ---- vignette: fixed to the viewport, soft black at the top and bottom edges.
    above the backdrop, hero and section content; below the header (z-40) and the footer (z-31) ---- */
 .vignette {
@@ -210,7 +238,8 @@ section[id] {
   .page-veil {
     display: none;
   }
-  .cursor-blink {
+  .cursor-blink,
+  .live-dot::after {
     animation: none;
   }
   .reveal-ready [data-reveal]:not(.is-revealed) {
