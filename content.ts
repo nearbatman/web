@@ -6,10 +6,9 @@ export type HeroMedia =
   | { kind: "video"; src: string; poster: string; playbackRate?: number };
 
 const configuredSiteUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim().replace(/\/+$/, "");
-const vercelProductionHost = process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL;
 
 export const site = {
-  url: configuredSiteUrl || (vercelProductionHost ? `https://${vercelProductionHost}` : "http://localhost:3000"),
+  url: configuredSiteUrl || (process.env.NODE_ENV === "production" ? "https://nearbatman.com" : "http://localhost:3000"),
   title: "$BATMAN — near's co-founder's corgi",
   ticker: "$BATMAN",
   description: "batman is the corgi of near's co-founder. now he's a memecoin on near.",
