@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import "tailwindcss" source("../");
 
 @theme inline {
   --color-night: #0b0b0f;
@@ -26,6 +26,9 @@
 html {
   background: var(--color-night);
   scroll-behavior: smooth;
+}
+html.lenis {
+  scroll-behavior: auto;
 }
 @media (prefers-reduced-motion: reduce) {
   html {
@@ -69,9 +72,199 @@ body {
     linear-gradient(90deg, rgb(11 11 15 / 0.8) 0%, rgb(11 11 15 / 0.45) 30%, rgb(11 11 15 / 0) 56%);
 }
 
+/* Hero and first section pass each other like two camera planes. */
+.scene-hero {
+  perspective: 1200px;
+}
+[data-hero-media] {
+  transform-origin: center center;
+  will-change: transform;
+}
+[data-hero-content] {
+  position: relative;
+  transform-origin: left bottom;
+  will-change: transform, opacity;
+}
+[data-scene-lore] {
+  transform-origin: center top;
+  will-change: transform, opacity;
+}
+[data-depth-card] {
+  transform: perspective(1000px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
+  transform-style: preserve-3d;
+  transition: transform 180ms ease-out, rotate 300ms var(--ease-out-strong),
+    translate 300ms var(--ease-out-strong), box-shadow 300ms var(--ease-out-strong);
+}
+@media (hover: hover) and (pointer: fine) {
+  [data-depth-card]:hover {
+    will-change: transform;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-hero-media],
+  [data-hero-content],
+  [data-scene-lore],
+  [data-depth-card] {
+    will-change: auto;
+  }
+  [data-depth-card] {
+    transform: none;
+    transition: none;
+  }
+}
+
 /* keep anchored sections clear of the sticky header */
 section[id] {
   scroll-margin-top: var(--header-h);
+}
+
+/* Keep the backdrop visible under the header throughout the page. */
+.site-header {
+  background: rgb(11 11 15 / 0.08);
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
+  transition: background-color 380ms ease, backdrop-filter 380ms ease, -webkit-backdrop-filter 380ms ease;
+}
+.site-header[data-scrolled="true"] {
+  background: rgb(11 11 15 / 0.1);
+  backdrop-filter: blur(10px) saturate(1.08);
+  -webkit-backdrop-filter: blur(10px) saturate(1.08);
+}
+.header-section-nav {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 250ms ease, transform 320ms var(--ease-out-strong), visibility 320ms;
+}
+.header-section-nav[data-hidden="true"] {
+  opacity: 0;
+  transform: translateY(-8px);
+  visibility: hidden;
+  pointer-events: none;
+}
+.header-section-link {
+  position: relative;
+  display: inline-block;
+  padding-block: 9px;
+  color: var(--color-bone);
+  font-size: 14px;
+  white-space: nowrap;
+  transition: color 180ms ease;
+}
+.header-section-link::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 4px;
+  left: 0;
+  height: 2px;
+  background: var(--color-signal);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 220ms var(--ease-out-strong);
+}
+.header-section-link:hover,
+.header-section-link:focus-visible {
+  color: var(--color-signal);
+}
+.header-section-link:hover::after,
+.header-section-link:focus-visible::after {
+  transform: scaleX(1);
+}
+.header-section-link:focus-visible,
+.header-menu-button:focus-visible,
+.header-mobile-link:focus-visible {
+  outline: 2px solid var(--color-bone);
+  outline-offset: 4px;
+}
+
+.header-menu-button {
+  display: grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  border: 1px solid rgb(237 234 228 / 0.28);
+  color: var(--color-bone);
+  transition: border-color 180ms ease, background-color 180ms ease;
+}
+.header-menu-button:hover,
+.header-menu-button[aria-expanded="true"] {
+  border-color: var(--color-signal);
+  background: rgb(0 150 50 / 0.12);
+}
+.header-menu-icon {
+  display: grid;
+  gap: 5px;
+}
+.header-menu-icon span {
+  width: 18px;
+  height: 2px;
+  background: currentColor;
+  transition: transform 220ms var(--ease-out-strong);
+}
+.header-menu-icon[data-open="true"] span:first-child {
+  transform: translateY(3.5px) rotate(45deg);
+}
+.header-menu-icon[data-open="true"] span:last-child {
+  transform: translateY(-3.5px) rotate(-45deg);
+}
+.header-mobile-nav {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  left: 0;
+  border-bottom: 1px solid rgb(237 234 228 / 0.2);
+  background: rgb(11 11 15 / 0.98);
+  box-shadow: 0 20px 32px rgb(0 0 0 / 0.3);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  transition: opacity 220ms ease, transform 260ms var(--ease-out-strong), visibility 260ms;
+}
+.header-mobile-nav[data-open="true"] {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.header-mobile-link {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-height: 48px;
+  border-bottom: 1px solid rgb(237 234 228 / 0.13);
+  color: var(--color-bone);
+  font-size: 14px;
+  transition: color 180ms ease, padding-left 180ms ease;
+}
+.header-mobile-link:hover,
+.header-mobile-link:focus-visible {
+  padding-left: 5px;
+  color: var(--color-signal);
+}
+.header-mobile-nav li:last-child .header-mobile-link {
+  border-bottom: 0;
+}
+.header-buy-compact {
+  display: none;
+}
+@media (max-width: 359px) {
+  .header-buy-full {
+    display: none;
+  }
+  .header-buy-compact {
+    display: inline;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .site-header,
+  .header-section-nav,
+  .header-section-link,
+  .header-section-link::after,
+  .header-menu-button,
+  .header-menu-icon span,
+  .header-mobile-nav,
+  .header-mobile-link {
+    transition-duration: 0.01ms;
+  }
 }
 
 /* optical centering for headings vertically centered against a block (lg+ zigzag only).
@@ -118,8 +311,8 @@ section[id] {
   }
 }
 
-/* ---- page-load loader (first visit per session). html.loader-active is set by the boot
-   script in layout.tsx and removed when the logo lands, or by its safety timer ---- */
+/* ---- page-load loader: the header unfolds during the logo's flight. Clip-path keeps
+   its landing coordinates fixed, unlike translating the whole header. ---- */
 .loader {
   display: none;
 }
@@ -129,6 +322,10 @@ section[id] {
 /* the flying logo lands here, so the real one waits; the hero entrance waits too */
 .loader-active [data-header-logo] {
   visibility: hidden;
+}
+.loader-active .site-header {
+  clip-path: inset(0 0 100% 0);
+  pointer-events: none;
 }
 .loader-active .hero-rise {
   animation-play-state: paused;
@@ -155,9 +352,75 @@ section[id] {
 .reveal-ready [data-reveal]:not(.is-revealed) {
   opacity: 0;
 }
+@keyframes depth-reveal {
+  from {
+    opacity: 0;
+    transform: perspective(900px) translate3d(0, 28px, -65px) rotateX(5deg);
+  }
+  to {
+    opacity: 1;
+    transform: perspective(900px) translate3d(0, 0, 0) rotateX(0);
+  }
+}
+@keyframes reveal-copy {
+  from { opacity: 0; transform: translate3d(0, 18px, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+@keyframes reveal-media {
+  from { opacity: 0; clip-path: inset(0 100% 0 0); }
+  to { opacity: 1; clip-path: inset(0 0 0 0); }
+}
+@keyframes reveal-stamp {
+  from { opacity: 0; transform: translate3d(-24px, 22px, 0) rotate(-3deg) scale(0.94); }
+  to { opacity: 1; transform: translate3d(0, 0, 0) rotate(0) scale(1); }
+}
+@keyframes reveal-row {
+  from { opacity: 0; clip-path: inset(0 100% 0 0); }
+  to { opacity: 1; clip-path: inset(0 0 0 0); }
+}
+@keyframes reveal-step {
+  from { opacity: 0; transform: translate3d(28px, 0, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+@keyframes reveal-card {
+  from { opacity: 0; transform: translate3d(0, 18px, 0) scale(0.985); }
+  to { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+}
+@keyframes reveal-link {
+  from { opacity: 0; transform: translate3d(-26px, 0, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
 [data-reveal].is-revealed {
-  animation: rise-in 500ms ease-out backwards;
+  animation: depth-reveal 520ms var(--ease-out-strong) backwards;
   animation-delay: var(--reveal-delay, 0ms);
+}
+[data-reveal="copy"].is-revealed { animation-name: reveal-copy; }
+[data-reveal="media"].is-revealed { animation-name: reveal-media; animation-duration: 620ms; }
+[data-reveal="stamp"].is-revealed { animation-name: reveal-stamp; animation-duration: 580ms; }
+[data-reveal="row"].is-revealed { animation-name: reveal-row; animation-duration: 480ms; }
+[data-reveal="step"].is-revealed { animation-name: reveal-step; }
+[data-reveal="faq"].is-revealed,
+[data-reveal="stats"].is-revealed { animation-name: reveal-card; }
+[data-reveal="link"].is-revealed { animation-name: reveal-link; }
+
+.typewriter-heading[data-typewriter="waiting"] .typewriter-ink,
+.typewriter-heading[data-typewriter="resetting"] .typewriter-ink {
+  visibility: hidden;
+}
+.typewriter-caret {
+  display: inline-block;
+  width: 0.045em;
+  height: 0.72em;
+  margin-left: 0.06em;
+  background: var(--color-signal);
+  vertical-align: -0.055em;
+  box-shadow: 0 0 16px rgb(0 150 50 / 0.5);
+  animation: cursor-blink 800ms steps(1) infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .typewriter-caret {
+    animation: none;
+  }
 }
 
 /* "batman is watching." — the final dot blinks like a text cursor */

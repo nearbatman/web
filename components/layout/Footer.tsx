@@ -19,6 +19,17 @@ export function Footer() {
           </a>
         </div>
       </div>
+      <p className="mx-auto max-w-[1400px] pb-5 text-center text-[12px] text-bone/50 sm:text-right">
+        {footer.credit}{" "}
+        <a
+          href={links.creatorX}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-bone/80 transition-colors duration-150 hover:text-signal focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-bone"
+        >
+          {footer.creator}
+        </a>
+      </p>
     </footer>
   );
 }

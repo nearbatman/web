@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Big_Shoulders, IBM_Plex_Mono } from "next/font/google";
 import { site } from "@/content";
 import { Loader, loaderBootScript } from "@/components/layout/Loader";
+import "lenis/dist/lenis.css";
 import "./globals.css";
 
 const bigShoulders = Big_Shoulders({

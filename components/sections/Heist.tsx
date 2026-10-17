@@ -1,5 +1,5 @@
 import { heist } from "@/content";
-import { SectionHeading } from "@/components/ui/SectionHeading";
+import { TypewriterHeading } from "@/components/ui/TypewriterHeading";
 import { FilmPlayer } from "@/components/ui/FilmPlayer";
 
 // three narration captions stacked, deliberately uneven: alternating offsets and tilts
@@ -13,12 +13,12 @@ export function Heist() {
     <section id="heist" className="px-[clamp(24px,5vw,112px)] py-[88px] md:py-[clamp(56px,9.375vw,180px)]">
       <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-y-6 md:gap-y-12 lg:grid-cols-[7fr_5fr] lg:gap-x-16 items-center">
         <div className="lg:col-start-2 lg:row-start-1">
-          <SectionHeading>{heist.heading}</SectionHeading>
+          <TypewriterHeading text={heist.heading} speed={58} />
 
           <ol className="mt-8 md:mt-10 flex flex-col gap-7">
             {heist.beats.map((beat, i) => (
               <li
-                data-reveal
+                data-reveal="stamp"
                 key={beat}
                 className={`relative border-2 border-ink bg-bone px-4 pt-9 pb-5 sm:px-6 text-ink shadow-[6px_6px_0_0_var(--color-signal)] ${placement[i]}`}
               >
@@ -30,7 +30,7 @@ export function Heist() {
             ))}
           </ol>
 
-          <p data-reveal className="mt-6 md:mt-9 text-[clamp(14px,0.78vw,20px)] leading-relaxed text-bone/70">
+          <p data-reveal="copy" className="mt-6 md:mt-9 text-[clamp(14px,0.78vw,20px)] leading-relaxed text-bone/70">
             {noteLines.map((line) => (
               <span key={line} className="block">
                 {line}
@@ -39,7 +39,7 @@ export function Heist() {
           </p>
         </div>
 
-        <div data-reveal className="lg:col-start-1 lg:row-start-1">
+        <div data-reveal="media" data-depth-card className="lg:col-start-1 lg:row-start-1">
           <FilmPlayer />
         </div>
       </div>

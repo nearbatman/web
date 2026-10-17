@@ -3,14 +3,15 @@ import { brand, hero, links } from "@/content";
 import { BuyButton } from "@/components/ui/BuyButton";
 import { Logo } from "@/components/ui/Logo";
 import { HeaderNav } from "./HeaderNav";
+import { HeaderMotion } from "./HeaderMotion";
 
-// sticky and identical everywhere: solid night bar, thin bone rule, logo left, nav centered (md+), buy right.
-// it sits in the page flow, so the hero starts below it (height = --header-h in globals.css).
+// the bar stays in view while its section links respond to scroll direction.
+// the hero runs underneath this bar so its transparent top state reveals the artwork.
 // data-header-logo is the landing spot for the page-load loader.
 export function Header() {
   return (
-    <header className="sticky top-0 z-40 h-(--header-h) border-b border-bone/20 bg-night px-[clamp(24px,5vw,112px)]">
-      <div className="mx-auto flex h-full max-w-[1400px] items-center justify-between md:grid md:grid-cols-[1fr_auto_1fr]">
+    <HeaderMotion>
+      <div className="mx-auto grid h-full max-w-[1400px] grid-cols-[1fr_auto_auto] items-center gap-3 md:grid-cols-[1fr_auto_1fr]">
         <Link
           href="/"
           data-header-logo
@@ -20,10 +21,12 @@ export function Header() {
           <Logo />
         </Link>
         <HeaderNav />
-        <BuyButton href={links.buy} size="xs" className="justify-self-end max-md:h-10 max-md:px-3.5 max-md:text-[17px]">
-          {hero.buyLabel}
+        <BuyButton href={links.buy} size="xs" className="header-buy-entry justify-self-end max-md:h-10 max-md:px-3.5 max-md:text-[17px]">
+          <span className="sr-only">{hero.buyLabel}</span>
+          <span aria-hidden="true" className="header-buy-full">{hero.buyLabel}</span>
+          <span aria-hidden="true" className="header-buy-compact">buy</span>
         </BuyButton>
       </div>
-    </header>
+    </HeaderMotion>
   );
 }

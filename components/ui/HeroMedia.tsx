@@ -8,12 +8,13 @@ export function HeroMedia({ media }: { media: Media }) {
   const still = media.kind === "image" ? media.src : media.poster;
 
   return (
-    <div aria-hidden className="absolute inset-0 -z-10">
+    <div data-hero-media aria-hidden className="absolute inset-0 -z-10">
       <Image
         src={still}
         alt=""
         fill
         sizes="100vw"
+        quality={90}
         loading="eager"
         fetchPriority="high"
         className="object-cover object-[66%_50%] md:object-center"

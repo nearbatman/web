@@ -3,7 +3,7 @@
 import { useId, useState, type CSSProperties } from "react";
 import { faq, type FaqItem } from "@/content";
 import { CopyCA } from "@/components/ui/CopyCA";
-import { SectionHeading } from "@/components/ui/SectionHeading";
+import { TypewriterHeading } from "@/components/ui/TypewriterHeading";
 
 // item.link.text inside the answer becomes a link, the rest stays as written in content.ts
 function AnswerText({ item }: { item: FaqItem }) {
@@ -52,8 +52,8 @@ export function Faq() {
       <div className="mx-auto grid max-w-[1400px] grid-cols-1 items-center gap-y-8 md:gap-y-12 lg:grid-cols-[7fr_5fr] lg:gap-x-16">
         {/* heading + sub are centered together on the items */}
         <div className="optical-center lg:col-start-2 lg:row-start-1" style={{ "--shift": 0.0229 } as CSSProperties}>
-          <SectionHeading>{faq.heading}</SectionHeading>
-          <p data-reveal className="mt-5 text-[clamp(17px,1.2vw,22px)] text-bone/70 sm:mt-7">
+          <TypewriterHeading text={faq.heading} speed={94} />
+          <p data-reveal="copy" className="mt-5 text-[clamp(17px,1.2vw,22px)] text-bone/70 sm:mt-7">
             {faq.sub}
           </p>
         </div>
@@ -65,7 +65,7 @@ export function Faq() {
             const panelId = `${baseId}-a${i}`;
             // the reveal class is added outside react, so the li's className must never change
             return (
-              <li data-reveal key={item.q}>
+              <li data-reveal="faq" key={item.q}>
                 <div
                   className={`border-2 border-bone bg-night/80 transition-[box-shadow,translate] duration-300 ease-(--ease-out-strong) motion-reduce:transition-none ${isOpen ? "-translate-y-0.5 shadow-[8px_8px_0_0_var(--color-signal)]" : "shadow-[0_0_0_0_var(--color-signal)]"}`}
                 >

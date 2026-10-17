@@ -39,10 +39,14 @@ export function Loader() {
     const groupEl = group.current;
     const coinEl = coin.current;
     const wordEl = word.current;
+    const headerEl = document.querySelector<HTMLElement>(".site-header");
     const animations: Animation[] = [];
+    const navAnimations: Animation[] = [];
     let cancelled = false;
+    let completed = false;
 
     function finish() {
+      completed = true;
       root.classList.remove(ACTIVE);
       setDone(true);
     }
@@ -90,7 +94,29 @@ export function Loader() {
         fill: "both",
       });
       animations.push(flight);
-      await flight.finished;
+      const headerFlight = headerEl?.animate(
+        [{ clipPath: "inset(0 0 100% 0)" }, { clipPath: "inset(0 0 0 0)" }],
+        { ...FLIGHT, easing: EASE_IN_OUT, fill: "both" },
+      );
+      if (headerFlight) animations.push(headerFlight);
+      // The links settle a little after the logo lands. Their animations live
+      // past the overlay's unmount, so they cannot snap to their final state.
+      headerEl?.querySelectorAll<HTMLElement>(".header-section-link, .header-mobile-entry, .header-buy-entry").forEach((el, index) => {
+        const animation = el.animate(
+          [{ opacity: 0, transform: "translateY(-16px)" }, { opacity: 1, transform: "translateY(0)" }],
+          {
+            delay: FLIGHT.delay + 350 + Math.min(index, 5) * 55,
+            duration: 900,
+            easing: EASE_OUT,
+            fill: "both",
+          },
+        );
+        navAnimations.push(animation);
+        animation.finished.then(() => animation.cancel(), () => {});
+      });
+      // Keep the mask until both animations reach their final frame. Finishing on
+      // the logo alone used to cancel the header midway and make it jump open.
+      await Promise.all([flight.finished, headerFlight?.finished]);
       if (!cancelled) finish();
     }
 
@@ -101,6 +127,7 @@ export function Loader() {
     return () => {
       cancelled = true;
       animations.forEach((animation) => animation.cancel());
+      if (!completed) navAnimations.forEach((animation) => animation.cancel());
     };
   }, []);
 

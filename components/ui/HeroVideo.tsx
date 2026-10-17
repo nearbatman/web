@@ -8,7 +8,7 @@ import { useEffect, useRef, useState } from "react";
 export function HeroVideo({ src, playbackRate = 1 }: { src: string; playbackRate?: number }) {
   const ref = useRef<HTMLVideoElement>(null);
   const [playing, setPlaying] = useState(false);
-  // the source is attached only after the page has loaded, so 1.5 MB of video never competes
+  // the source is attached only after the page has loaded, so the video never competes
   // with fonts, css and the still for first paint. reduced-motion users never download it.
   const [ready, setReady] = useState(false);
 

@@ -1,36 +1,24 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# $BATMAN website
 
-## Getting Started
+Next.js landing page for $BATMAN on NEAR.
 
-First, run the development server:
+## Local development
 
 ```bash
+npm ci
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Open the localhost address printed by Next.js. The app works without an env file.
 
 ## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. Commit and push the site to the GitHub repository, `rommelwif/batmannear`.
+2. In [Vercel New Project](https://vercel.com/new), import `rommelwif/batmannear`. Keep **Next.js** as the framework and `.` as the root directory.
+3. In **Environment Variables**, set `NEXT_PUBLIC_SITE_URL` to the final canonical URL, for example `https://example.com`. Select **Production**. The URL is used for canonical metadata, Open Graph, `robots.txt`, and `sitemap.xml`. Without it, Vercel's production URL is used as a fallback.
+4. Deploy and check the temporary `*.vercel.app` URL before connecting the domain. Check the hero video, mobile navigation, external links, and `/robots.txt` and `/sitemap.xml`.
+5. In **Project → Settings → Domains**, add the domain. Add `www` too if both forms should work, and choose one as the primary domain with a redirect from the other.
+6. In **Spaceship → Advanced DNS → Host records**, enter **the exact A/CNAME/TXT records displayed by Vercel** for this project. If the domain uses custom nameservers, edit records at that DNS provider instead. Do not change unrelated MX/email records. Vercel provisions HTTPS after DNS verification.
+7. If `NEXT_PUBLIC_SITE_URL` was added or changed after the first deployment, redeploy Production. Then verify the final domain, canonical URL, social preview, `robots.txt`, and `sitemap.xml`.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Further reference: [Vercel deployments](https://vercel.com/docs/deployments), [custom domains](https://vercel.com/docs/domains/set-up-custom-domain).

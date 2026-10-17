@@ -81,8 +81,9 @@ export function PageBackground() {
           alt=""
           fill
           sizes="100vw"
+          unoptimized
           className="object-cover"
-          style={{ opacity: pageBg.bgOpacity }}
+          style={{ opacity: pageBg.bgOpacity, filter: "contrast(1.08) saturate(1.08)" }}
         />
         {/* safety: soft dark fade on the image's own bottom edge so a hard edge can never show */}
         <div

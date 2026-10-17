@@ -6,7 +6,7 @@ import { HeroWeather } from "@/components/ui/HeroWeather";
 
 export function Hero() {
   return (
-    <section id="hero" className="relative isolate flex min-h-[calc(100dvh-var(--header-h))] items-end overflow-hidden">
+    <section id="hero" className="scene-hero relative isolate -mt-(--header-h) flex min-h-dvh items-end overflow-hidden">
       <HeroMedia media={hero.media} />
       <HeroWeather />
       <div aria-hidden className="hero-scrim absolute inset-0 -z-10" />
@@ -15,7 +15,7 @@ export function Hero() {
         className="halftone absolute inset-x-0 bottom-0 -z-10 h-[40%] mask-[linear-gradient(to_top,black_15%,transparent)]"
       />
 
-      <div className="w-full px-[clamp(24px,5vw,112px)] min-[1921px]:pl-[calc((100%-1400px)/2)] pb-[clamp(40px,10vh,128px)] short-mobile:pb-8">
+      <div data-hero-content className="w-full px-[clamp(24px,5vw,112px)] min-[1921px]:pl-[calc((100%-1400px)/2)] pb-[clamp(40px,10vh,128px)] short-mobile:pb-8">
         <h1
           className="hero-rise font-display text-[clamp(72px,24vw,104px)] short-mobile:text-[64px] md:text-[clamp(104px,12vw,307px)] leading-[0.78] font-black tracking-[-0.01em] text-bone [text-shadow:0.035em_0.035em_0_var(--color-ink)]"
           style={{ animationDelay: "300ms" }}

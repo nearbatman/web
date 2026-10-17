@@ -1,15 +1,11 @@
 import Image from "next/image";
 import { linkList, links } from "@/content";
-import { SectionHeading } from "@/components/ui/SectionHeading";
+import { TypewriterHeading } from "@/components/ui/TypewriterHeading";
 import { ArrowUpRightIcon } from "@/components/ui/icons";
 
 // last word is the green punchline, split on display only
 const cut = linkList.heading.lastIndexOf(" ");
 const headingStart = linkList.heading.slice(0, cut);
-const headingEnd = linkList.heading.slice(cut + 1);
-// a trailing "." blinks like a text cursor
-const endsWithDot = headingEnd.endsWith(".");
-const headingWord = endsWithDot ? headingEnd.slice(0, -1) : headingEnd;
 
 export function Links() {
   return (
@@ -17,7 +13,8 @@ export function Links() {
       <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-y-6 md:gap-y-12 lg:grid-cols-[7fr_5fr] lg:gap-x-16 items-center">
         <div className="max-lg:contents lg:col-start-2 lg:row-start-1">
           <a
-            data-reveal
+            data-reveal="media"
+            data-depth-card
             href={links.irlPost}
             target="_blank"
             rel="noopener noreferrer"
@@ -35,19 +32,13 @@ export function Links() {
             />
           </a>
           <div className="max-lg:order-1 max-md:mb-2">
-            <SectionHeading>
-              {headingStart}{" "}
-              <span className="text-signal">
-                {headingWord}
-                {endsWithDot && <span className="cursor-blink">.</span>}
-              </span>
-            </SectionHeading>
+            <TypewriterHeading text={linkList.heading} accentFrom={headingStart.length + 1} blinkFinalDot speed={66} />
           </div>
         </div>
 
         <ul className="border-y-2 border-bone max-lg:order-2 lg:col-start-1 lg:row-start-1">
           {linkList.items.map((item) => (
-            <li data-reveal key={item.href} className="border-b-2 border-bone/25 last:border-b-0">
+            <li data-reveal="link" key={item.href} className="border-b-2 border-bone/25 last:border-b-0">
               <a
                 href={item.href}
                 target="_blank"

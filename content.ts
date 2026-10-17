@@ -5,8 +5,11 @@ export type HeroMedia =
   | { kind: "image"; src: string }
   | { kind: "video"; src: string; poster: string; playbackRate?: number };
 
+const configuredSiteUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim().replace(/\/+$/, "");
+const vercelProductionHost = process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL;
+
 export const site = {
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
+  url: configuredSiteUrl || (vercelProductionHost ? `https://${vercelProductionHost}` : "http://localhost:3000"),
   title: "$BATMAN — near's co-founder's corgi",
   ticker: "$BATMAN",
   description: "batman is the corgi of near's co-founder. now he's a memecoin on near.",
@@ -23,6 +26,7 @@ export const token = {
 export const links = {
   buy: "https://nearly.trade/batman-4.nearlytrade.near",
   x: "https://x.com/BatmanDogNear",
+  creatorX: "https://x.com/ellysomeX",
   // token address url: dexscreener redirects it to the main pair
   dexscreener: "https://dexscreener.com/near/batman-4.nearlytrade.near",
   nearblocks: "https://nearblocks.io/tokens/batman-4.nearlytrade.near",
@@ -63,9 +67,8 @@ export const hero = {
   buyLabel: "buy $BATMAN",
   media: {
     kind: "video",
-    src: "/hero-loop.mp4",
+    src: "/background.mp4",
     poster: "/hero-bg-frame.png",
-    playbackRate: 0.75,
   } as HeroMedia,
 };
 
@@ -94,7 +97,7 @@ export const pageBg = {
   width: 1920,
   height: 1140,
   heightVh: 140, // rendered image height as % of the viewport, aspect kept (width covers)
-  bgOpacity: 0.15, // image opacity over #0B0B0F
+  bgOpacity: 0.07, // quiet city texture behind the sections
   fadeHeight: 200, // px of soft dark fade under the hero's bottom edge
 };
 
@@ -238,6 +241,8 @@ export const footer = {
     "$BATMAN is a memecoin with no intrinsic value or expectation of financial return. not affiliated with near foundation or alex skidanov. not financial advice.",
   copyright: "© 2026 batman",
   xLabel: "batman on x",
+  credit: "website made by",
+  creator: "@ellysomeX",
 };
 
 export const notFound = {
