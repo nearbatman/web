@@ -9,6 +9,8 @@ type Stats = {
   price: number | null;
   change: number | null;
   volume: number | null;
+  buys: number | null;
+  sells: number | null;
 };
 
 type State = { status: "loading" } | { status: "error" } | { status: "ready"; stats: Stats };
@@ -50,6 +52,8 @@ async function fetchStats(signal: AbortSignal): Promise<Stats> {
     price: num(pair.priceUsd),
     change: num(pair.priceChange?.h24),
     volume: num(pair.volume?.h24),
+    buys: num(pair.txns?.h24?.buys),
+    sells: num(pair.txns?.h24?.sells),
   };
 }
 
@@ -102,6 +106,16 @@ function useLiveStats() {
   return state;
 }
 
+// small line under a tile value: 24h % change (green/red) or the 24h buys / sells count
+function Change({ value }: { value: number }) {
+  return (
+    <span className={`mt-2 block text-[14px] font-medium tabular-nums ${value >= 0 ? "text-signal" : "text-[#e5484d]"}`}>
+      {value >= 0 ? "+" : ""}
+      {value.toFixed(2)}% <span className="text-bone/50">{liveStats.change}</span>
+    </span>
+  );
+}
+
 function Tile({ label, value, loading, children }: { label: string; value: string; loading: boolean; children?: ReactNode }) {
   return (
     <div className="flex flex-auto flex-col justify-between gap-4 border-2 border-bone bg-night/80 px-4 py-5 sm:px-5">
@@ -145,16 +159,19 @@ export function LiveStats() {
       </div>
 
       <dl aria-busy={loading} className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-        <Tile label={liveStats.marketCap} value={usdCompact(stats?.marketCap ?? null)} loading={loading} />
+        <Tile label={liveStats.marketCap} value={usdCompact(stats?.marketCap ?? null)} loading={loading}>
+          {change !== null && <Change value={change} />}
+        </Tile>
         <Tile label={liveStats.price} value={usdPrice(stats?.price ?? null)} loading={loading}>
-          {change !== null && (
-            <span className={`mt-2 block text-[14px] font-medium tabular-nums ${change >= 0 ? "text-signal" : "text-[#e5484d]"}`}>
-              {change >= 0 ? "+" : ""}
-              {change.toFixed(2)}% <span className="text-bone/50">{liveStats.change}</span>
+          {change !== null && <Change value={change} />}
+        </Tile>
+        <Tile label={liveStats.volume} value={usdCompact(stats?.volume ?? null)} loading={loading}>
+          {stats?.buys != null && stats.sells != null && (
+            <span className="mt-2 block text-[14px] text-bone/50 tabular-nums">
+              {stats.buys} {liveStats.buys} / {stats.sells} {liveStats.sells}
             </span>
           )}
         </Tile>
-        <Tile label={liveStats.volume} value={usdCompact(stats?.volume ?? null)} loading={loading} />
       </dl>
     </div>
   );

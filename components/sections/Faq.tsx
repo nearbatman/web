@@ -41,6 +41,7 @@ function PlusMinus({ open }: { open: boolean }) {
   );
 }
 
+// zigzag like the other sections: items left, heading right (heading first on mobile).
 // one open at a time; panels animate height via grid rows 0fr -> 1fr
 export function Faq() {
   const [open, setOpen] = useState<number | null>(null);
@@ -48,15 +49,15 @@ export function Faq() {
 
   return (
     <section id="faq" className="px-[clamp(24px,5vw,112px)] py-[72px] md:py-[clamp(56px,9.375vw,180px)]">
-      <div className="mx-auto grid max-w-[1400px] grid-cols-1 items-start gap-y-12 lg:grid-cols-[5fr_7fr] lg:gap-x-16">
-        <div>
+      <div className="mx-auto grid max-w-[1400px] grid-cols-1 items-center gap-y-12 lg:grid-cols-[7fr_5fr] lg:gap-x-16">
+        <div className="lg:col-start-2 lg:row-start-1">
           <SectionHeading>{faq.heading}</SectionHeading>
           <p data-reveal className="mt-5 text-[clamp(17px,1.2vw,22px)] text-bone/70 sm:mt-7">
             {faq.sub}
           </p>
         </div>
 
-        <ul className="flex flex-col gap-3">
+        <ul className="flex flex-col gap-4 lg:col-start-1 lg:row-start-1">
           {faq.items.map((item, i) => {
             const isOpen = open === i;
             const buttonId = `${baseId}-q${i}`;
@@ -65,7 +66,7 @@ export function Faq() {
             return (
               <li data-reveal key={item.q}>
                 <div
-                  className={`rounded-2xl border bg-night/70 transition-colors duration-200 ${isOpen ? "border-bone/50" : "border-bone/20 hover:border-bone/40"}`}
+                  className={`border-2 border-bone bg-night/80 transition-[box-shadow,translate] duration-300 ease-(--ease-out-strong) motion-reduce:transition-none ${isOpen ? "-translate-y-0.5 shadow-[8px_8px_0_0_var(--color-signal)]" : "shadow-[0_0_0_0_var(--color-signal)]"}`}
                 >
                   <h3>
                     <button
@@ -74,7 +75,7 @@ export function Faq() {
                       aria-expanded={isOpen}
                       aria-controls={panelId}
                       onClick={() => setOpen(isOpen ? null : i)}
-                      className="flex w-full items-center justify-between gap-6 rounded-2xl px-5 py-5 text-left text-[clamp(17px,1.2vw,22px)] font-medium text-bone sm:px-7 sm:py-6 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bone"
+                      className="flex w-full items-center justify-between gap-6 px-5 py-5 text-left text-[clamp(17px,1.2vw,22px)] font-medium text-bone sm:px-7 sm:py-6 focus-visible:outline-2 focus-visible:-outline-offset-6 focus-visible:outline-bone"
                     >
                       {item.q}
                       <PlusMinus open={isOpen} />

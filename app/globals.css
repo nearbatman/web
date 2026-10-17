@@ -12,6 +12,7 @@
 
 :root {
   color-scheme: dark;
+  --header-h: 56px;
   --ease-out-strong: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -59,6 +60,11 @@ body {
   background:
     linear-gradient(0deg, var(--color-night) 0%, rgb(11 11 15 / 0.55) 22%, rgb(11 11 15 / 0) 46%),
     linear-gradient(90deg, rgb(11 11 15 / 0.8) 0%, rgb(11 11 15 / 0.45) 30%, rgb(11 11 15 / 0) 56%);
+}
+
+/* keep anchored sections clear of the sticky header */
+section[id] {
+  scroll-margin-top: var(--header-h);
 }
 
 /* hero fog: two big soft banks in the lower half, drifting sideways at different speeds */

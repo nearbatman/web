@@ -6,7 +6,7 @@ import { HeroWeather } from "@/components/ui/HeroWeather";
 
 export function Hero() {
   return (
-    <section id="hero" className="relative isolate flex min-h-[100dvh] items-end overflow-hidden">
+    <section id="hero" className="relative isolate flex min-h-[calc(100dvh-var(--header-h))] items-end overflow-hidden">
       <HeroMedia media={hero.media} />
       <HeroWeather />
       <div aria-hidden className="hero-scrim absolute inset-0 -z-10" />

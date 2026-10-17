@@ -15,10 +15,8 @@ export default function Home() {
     <>
       <ScrollReveal />
       <PageBackground />
-      <div className="relative">
-        <Header />
-        <Hero />
-      </div>
+      <Header />
+      <Hero />
       <main>
         <Lore />
         <Heist />

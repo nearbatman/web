@@ -23,7 +23,8 @@ export const token = {
 export const links = {
   buy: "https://nearly.trade/batman-4.nearlytrade.near",
   x: "https://x.com/BatmanDogNear",
-  dexscreener: "https://dexscreener.com/near/refv2-batman-4.nearlytrade.near:wrap.near:10000",
+  // token address url: dexscreener redirects it to the main pair
+  dexscreener: "https://dexscreener.com/near/batman-4.nearlytrade.near",
   nearblocks: "https://nearblocks.io/tokens/batman-4.nearlytrade.near",
   skidanovPost: "https://x.com/AlexSkidanov/status/2099238589989265664",
   irlPost: "https://x.com/AlexSkidanov/status/2106115398865494404",
@@ -124,6 +125,8 @@ export const liveStats = {
   price: "price",
   volume: "24h volume",
   change: "24h",
+  buys: "buys",
+  sells: "sells",
   unavailable: "—",
 };
 
@@ -148,7 +151,7 @@ export type FaqItem = {
 };
 
 export const faq = {
-  heading: "faqs",
+  heading: "faq",
   sub: "frequently barked questions.",
   items: [
     {
