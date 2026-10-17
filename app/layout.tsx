@@ -20,6 +20,9 @@ const plexMono = IBM_Plex_Mono({
   weight: ["400", "500", "600"],
 });
 
+const socialImageUrl = `${site.url}/batman-social-v2.jpg`;
+const socialImageAlt = "Batman, the corgi of a NEAR co-founder, on a dark city rooftop.";
+
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: { default: site.title, template: `%s | ${site.ticker}` },
@@ -39,11 +42,14 @@ export const metadata: Metadata = {
     siteName: site.ticker,
     title: site.title,
     description: site.description,
+    images: [{ url: socialImageUrl, width: 1200, height: 630, alt: socialImageAlt }],
   },
   twitter: {
     card: "summary_large_image",
+    site: "@BatmanDogNear",
     title: site.title,
     description: site.description,
+    images: [{ url: socialImageUrl, alt: socialImageAlt }],
   },
 };
 
