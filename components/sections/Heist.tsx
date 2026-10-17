@@ -10,12 +10,12 @@ const noteLines = heist.note.split(/(?<=\.)\s+/);
 
 export function Heist() {
   return (
-    <section id="heist" className="px-[clamp(24px,5vw,112px)] py-[72px] md:py-[clamp(56px,9.375vw,180px)]">
-      <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-y-12 lg:grid-cols-[7fr_5fr] lg:gap-x-16 items-center">
+    <section id="heist" className="px-[clamp(24px,5vw,112px)] py-[88px] md:py-[clamp(56px,9.375vw,180px)]">
+      <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-y-6 md:gap-y-12 lg:grid-cols-[7fr_5fr] lg:gap-x-16 items-center">
         <div className="lg:col-start-2 lg:row-start-1">
           <SectionHeading>{heist.heading}</SectionHeading>
 
-          <ol className="mt-10 flex flex-col gap-7">
+          <ol className="mt-8 md:mt-10 flex flex-col gap-7">
             {heist.beats.map((beat, i) => (
               <li
                 data-reveal
@@ -30,7 +30,7 @@ export function Heist() {
             ))}
           </ol>
 
-          <p data-reveal className="mt-9 text-[clamp(14px,0.78vw,20px)] leading-relaxed text-bone/70">
+          <p data-reveal className="mt-6 md:mt-9 text-[clamp(14px,0.78vw,20px)] leading-relaxed text-bone/70">
             {noteLines.map((line) => (
               <span key={line} className="block">
                 {line}

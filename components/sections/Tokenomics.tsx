@@ -6,14 +6,14 @@ import { LiveLiquidity, LiveStats } from "@/components/ui/LiveStats";
 
 export function Tokenomics() {
   return (
-    <section id="numbers" className="px-[clamp(24px,5vw,112px)] py-[72px] md:py-[clamp(56px,9.375vw,180px)]">
-      <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-y-12 lg:grid-cols-[7fr_5fr] lg:gap-x-16 items-center">
+    <section id="numbers" className="px-[clamp(24px,5vw,112px)] py-[88px] md:py-[clamp(56px,9.375vw,180px)]">
+      <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-y-8 md:gap-y-12 lg:grid-cols-[7fr_5fr] lg:gap-x-16 items-center">
         {/* centered on the block from the "live" label down to the bottom rule */}
         <div className="optical-center lg:col-start-2 lg:row-start-1" style={{ "--shift": 0.0417 } as CSSProperties}>
           <SectionHeading>{tokenomics.heading}</SectionHeading>
         </div>
 
-        <div className="flex flex-col gap-10 lg:col-start-1 lg:row-start-1">
+        <div className="flex flex-col gap-6 md:gap-10 lg:col-start-1 lg:row-start-1">
           <LiveStats />
 
           {/* case-file sheet: rules instead of cards */}
@@ -43,7 +43,7 @@ export function Tokenomics() {
       {/* geckoterminal embed: nearly.trade refuses framing, see content.ts */}
       <div
         data-reveal
-        className="mx-auto mt-16 h-[480px] max-w-[1400px] border-2 border-bone bg-ink shadow-[8px_8px_0_0_var(--color-signal)] sm:h-[560px] sm:shadow-[10px_10px_0_0_var(--color-signal)] md:mt-[clamp(64px,6vw,120px)]"
+        className="mx-auto mt-6 h-[480px] max-w-[1400px] border-2 border-bone bg-ink shadow-[8px_8px_0_0_var(--color-signal)] sm:h-[560px] sm:shadow-[10px_10px_0_0_var(--color-signal)] md:mt-[clamp(64px,6vw,120px)]"
       >
         <iframe src={chart.src} title={chart.title} loading="lazy" className="block h-full w-full" />
       </div>

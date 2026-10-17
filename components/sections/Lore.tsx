@@ -7,8 +7,8 @@ const lines = lore.body.split(/(?<=\.)\s+/);
 
 export function Lore() {
   return (
-    <section id="lore" className="px-[clamp(24px,5vw,112px)] py-[72px] md:py-[clamp(56px,9.375vw,180px)]">
-      <div className="mx-auto grid max-w-[1400px] grid-cols-1 items-center gap-y-12 lg:grid-cols-[1fr_480px] lg:gap-x-[120px]">
+    <section id="lore" className="px-[clamp(24px,5vw,112px)] py-[88px] md:py-[clamp(56px,9.375vw,180px)]">
+      <div className="mx-auto grid max-w-[1400px] grid-cols-1 items-center gap-y-6 md:gap-y-12 lg:grid-cols-[1fr_480px] lg:gap-x-[120px]">
         <div>
           <SectionHeading>{lore.heading}</SectionHeading>
           <p data-reveal className="mt-8 border-l-2 border-bone/30 pl-5 sm:mt-12 sm:pl-8 text-[clamp(18px,1.4vw,27px)] leading-[1.6]">

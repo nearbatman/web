@@ -48,8 +48,8 @@ export function Faq() {
   const baseId = useId();
 
   return (
-    <section id="faq" className="px-[clamp(24px,5vw,112px)] py-[72px] md:py-[clamp(56px,9.375vw,180px)]">
-      <div className="mx-auto grid max-w-[1400px] grid-cols-1 items-center gap-y-12 lg:grid-cols-[7fr_5fr] lg:gap-x-16">
+    <section id="faq" className="px-[clamp(24px,5vw,112px)] py-[88px] md:py-[clamp(56px,9.375vw,180px)]">
+      <div className="mx-auto grid max-w-[1400px] grid-cols-1 items-center gap-y-8 md:gap-y-12 lg:grid-cols-[7fr_5fr] lg:gap-x-16">
         {/* heading + sub are centered together on the items */}
         <div className="optical-center lg:col-start-2 lg:row-start-1" style={{ "--shift": 0.0229 } as CSSProperties}>
           <SectionHeading>{faq.heading}</SectionHeading>

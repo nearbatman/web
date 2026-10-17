@@ -144,6 +144,10 @@ export const liveStats = {
   marketCap: "market cap",
   price: "price",
   volume: "24h volume",
+  // tile labels below md, where the three tiles share one row
+  marketCapShort: "mcap",
+  priceShort: "price",
+  volumeShort: "vol 24h",
   change: "24h",
   liquiditySeparator: "·",
   buys: "buys",

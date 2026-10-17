@@ -13,8 +13,8 @@ const headingWord = endsWithDot ? headingEnd.slice(0, -1) : headingEnd;
 
 export function Links() {
   return (
-    <section id="links" className="px-[clamp(24px,5vw,112px)] py-[72px] md:py-[clamp(56px,9.375vw,180px)]">
-      <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-y-12 lg:grid-cols-[7fr_5fr] lg:gap-x-16 items-center">
+    <section id="links" className="px-[clamp(24px,5vw,112px)] py-[88px] md:py-[clamp(56px,9.375vw,180px)]">
+      <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-y-6 md:gap-y-12 lg:grid-cols-[7fr_5fr] lg:gap-x-16 items-center">
         <div className="max-lg:contents lg:col-start-2 lg:row-start-1">
           <a
             data-reveal
@@ -34,7 +34,7 @@ export function Links() {
               className="h-auto w-full"
             />
           </a>
-          <div className="max-lg:order-1">
+          <div className="max-lg:order-1 max-md:mb-2">
             <SectionHeading>
               {headingStart}{" "}
               <span className="text-signal">

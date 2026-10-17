@@ -127,22 +127,45 @@ function useLiveStats() {
 // small line under a tile value: 24h % change (green/red) or the 24h buys / sells count
 function Change({ value }: { value: number }) {
   return (
-    <span className={`mt-2 block text-[14px] font-medium tabular-nums ${value >= 0 ? "text-signal" : "text-[#e5484d]"}`}>
+    <span
+      className={`mt-1 block text-[10px] font-medium whitespace-nowrap tabular-nums md:mt-2 md:text-[14px] ${value >= 0 ? "text-signal" : "text-[#e5484d]"}`}
+    >
       {value >= 0 ? "+" : ""}
-      {value.toFixed(2)}% <span className="text-bone/50">{liveStats.change}</span>
+      {value.toFixed(2)}%<span className="text-bone/50 max-md:hidden"> {liveStats.change}</span>
     </span>
   );
 }
 
-function Tile({ label, value, loading, children }: { label: string; value: string; loading: boolean; children?: ReactNode }) {
+// below md the three tiles share one row: compact padding, short labels, and a value font sized
+// from the tile's own width (cqi), so "$0.002369" always fits on one line (≈4.24em wide).
+// md+ keeps the content-sized tiles (no container there: it would collapse their intrinsic width).
+function Tile({
+  label,
+  short,
+  value,
+  loading,
+  children,
+}: {
+  label: string;
+  short: string;
+  value: string;
+  loading: boolean;
+  children?: ReactNode;
+}) {
   return (
-    <div className="flex flex-auto flex-col justify-between gap-4 border-2 border-bone bg-night/80 px-4 py-5 sm:px-5">
-      <dt className="text-[15px] text-bone/70">{label}</dt>
+    <div className="flex min-w-0 flex-col justify-between gap-2 border-2 border-bone bg-night/80 p-2.5 max-md:@container md:flex-auto md:gap-4 md:px-5 md:py-5">
+      <dt className="text-[10px] text-bone/70 md:text-[15px]">
+        <span className="md:hidden">{short}</span>
+        <span className="max-md:hidden">{label}</span>
+      </dt>
       <dd>
         {loading ? (
-          <span aria-hidden className="block h-[clamp(36px,3vw,56px)] w-[85%] animate-pulse bg-bone/15" />
+          <span
+            aria-hidden
+            className="block h-[clamp(12px,22cqi,20px)] w-[85%] animate-pulse bg-bone/15 md:h-[clamp(36px,3vw,56px)]"
+          />
         ) : (
-          <span className="block font-display text-[clamp(36px,3vw,56px)] leading-none font-extrabold tabular-nums">
+          <span className="block font-display text-[clamp(12px,22cqi,20px)] leading-none font-extrabold whitespace-nowrap tabular-nums md:text-[clamp(36px,3vw,56px)]">
             {value}
           </span>
         )}
@@ -176,17 +199,22 @@ export function LiveStats() {
         </a>
       </div>
 
-      <dl aria-busy={loading} className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-        <Tile label={liveStats.marketCap} value={usdCompact(stats?.marketCap ?? null)} loading={loading}>
+      <dl aria-busy={loading} className="grid grid-cols-3 gap-2 md:flex md:flex-row md:flex-wrap md:gap-3">
+        <Tile label={liveStats.marketCap} short={liveStats.marketCapShort} value={usdCompact(stats?.marketCap ?? null)} loading={loading}>
           {change !== null && <Change value={change} />}
         </Tile>
-        <Tile label={liveStats.price} value={usdPrice(stats?.price ?? null)} loading={loading}>
+        <Tile label={liveStats.price} short={liveStats.priceShort} value={usdPrice(stats?.price ?? null)} loading={loading}>
           {change !== null && <Change value={change} />}
         </Tile>
-        <Tile label={liveStats.volume} value={usdCompact(stats?.volume ?? null)} loading={loading}>
+        <Tile label={liveStats.volume} short={liveStats.volumeShort} value={usdCompact(stats?.volume ?? null)} loading={loading}>
           {stats?.buys != null && stats.sells != null && (
-            <span className="mt-2 block text-[14px] text-bone/50 tabular-nums">
-              {stats.buys} {liveStats.buys} / {stats.sells} {liveStats.sells}
+            <span className="mt-1 block text-[10px] whitespace-nowrap text-bone/50 tabular-nums md:mt-2 md:text-[14px]">
+              <span className="md:hidden">
+                {stats.buys}/{stats.sells}
+              </span>
+              <span className="max-md:hidden">
+                {stats.buys} {liveStats.buys} / {stats.sells} {liveStats.sells}
+              </span>
             </span>
           )}
         </Tile>
