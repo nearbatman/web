@@ -25,7 +25,7 @@ export const token = {
 export const links = {
   buy: "https://nearly.trade/batman-4.nearlytrade.near",
   x: "https://x.com/BatmanDogNear",
-  creatorX: "https://x.com/ellysomeX",
+  creatorX: "https://x.com/ellysome",
   // token address url: dexscreener redirects it to the main pair
   dexscreener: "https://dexscreener.com/near/batman-4.nearlytrade.near",
   nearblocks: "https://nearblocks.io/tokens/batman-4.nearlytrade.near",
@@ -241,7 +241,7 @@ export const footer = {
   copyright: "© 2026 batman",
   xLabel: "batman on x",
   credit: "website made by",
-  creator: "@ellysomeX",
+  creator: "@ellysome",
 };
 
 export const notFound = {
